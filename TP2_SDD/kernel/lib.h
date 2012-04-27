@@ -16,7 +16,7 @@
  * @sortie
  * 	Un pointeur vers une mémoire de taille adéquate.
  */
-#define ALLOC(_n,_t) (_t*) malloc(_n*sizeof(_t))
+#define ALLOC(N,T) (T*) malloc(N*sizeof(T))
 
 /**************************************************************************************
  *          STRUCTURES & TYPES
@@ -26,17 +26,17 @@ typedef int elem;
 typedef struct bloc_pile {
 	elem * tab;
 	int taille;
-	int deb;
-	int fin;
+	int tete;
 } pile_t;
 
 /**************************************************************************************
  *          PROTOTYPES
  **************************************************************************************/
 
+pile_t * initPile(int taille);
 void empiler(elem element, pile_t * pile);
 elem depiler(pile_t * pile);
 int vide(pile_t * pile);
-pile_t * initPile();
+int pleine(pile_t * pile);
 void libererPile(pile_t * pile);
 
