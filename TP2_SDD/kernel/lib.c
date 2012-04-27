@@ -21,7 +21,7 @@ elem depiler(pile_t * pile) {
 	if (!vide(pile)) {
 		return pile->tab[pile->tete--];
 	}
-	return (elem)NULL;
+	return (elem) NULL;
 }
 
 int vide(pile_t * pile) {
@@ -31,7 +31,6 @@ int vide(pile_t * pile) {
 int pleine(pile_t * pile) {
 	return pile->tete == pile->taille - 1;
 }
-
 
 void libererPile(pile_t * pile) {
 	free(pile->tab);

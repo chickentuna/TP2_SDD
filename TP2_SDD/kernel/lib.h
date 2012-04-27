@@ -2,6 +2,9 @@
  *          CONSTANTES & MACROS
  **************************************************************************************/
 
+#ifndef LIB_H_
+#define LIB_H_
+
 /* Constantes booléennes classiques. */
 #define VRAI 1
 #define FAUX 0
@@ -97,4 +100,6 @@ int pleine(pile_t * pile);
  *  pile - pile à libérer.
  */
 void libererPile(pile_t * pile);
+
+#endif
 
