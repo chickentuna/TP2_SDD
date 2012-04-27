@@ -4,6 +4,6 @@
 
 int main(int argc, char** argv) {
 
-	printf("Hello world");
+	printf("%d",(int)NULL);
 	return EXIT_SUCCESS;
 }
