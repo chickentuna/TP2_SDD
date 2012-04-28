@@ -1,4 +1,4 @@
-/*
+﻿/*
  * element.h
  *
  *  Created on: 28 avr. 2012

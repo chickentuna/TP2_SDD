@@ -1,4 +1,4 @@
-#include "arbre.h"
+﻿#include "arbre.h"
 #include "element.h"
 
 arbre_t * initArbre(char * str) {

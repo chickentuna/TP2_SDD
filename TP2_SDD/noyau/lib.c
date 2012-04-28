@@ -1,4 +1,4 @@
-/*
+﻿/*
  * lib.c
  *
  *  Created on: 28 avr. 2012
