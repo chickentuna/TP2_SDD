@@ -1,7 +1,4 @@
 #include "pile.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 
 pile_t * creerPile(int taille) {
 	pile_t * nouv;
@@ -23,7 +20,7 @@ elem_t depiler(pile_t* pile) {
 	if (!vide(pile)) {
 		return pile->tab[pile->tete--];
 	}
-	return (elem_t) NULL;
+	return (elem_t) 0;
 }
 
 int vide(pile_t * pile) {

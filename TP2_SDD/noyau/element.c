@@ -16,3 +16,7 @@ char* elementToString(elem_t el) {
 	return buffer;
 }
 
+elem_t stringToElement(char* value) {
+	return value[0];
+}
+

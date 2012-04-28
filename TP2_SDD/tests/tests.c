@@ -4,8 +4,8 @@
 
 #include "tests.h"
 
-result_t* test_creerPile() {
 
+result_t* test_creerPile() {
 	result_t* r = creerResultat();
 
 	// Création de la pile.
