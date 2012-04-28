@@ -4,19 +4,36 @@
 
 #include "tests.h"
 
+//result_t* test_initPile() {
+//
+//	result_t* r = creerResultat();
+//
+//	// Création de la pile.
+//	{
+//		pile_t* pile = initPile(5);
+//		assertion(r, pile->taille == 0, "Pile vide => taille 0");
+//		assertion(r, pile->tete == 0, "Pile vide => tete 0");
+//	}
+//
+//	return r;
+//
+//}
+
 result_t* test_initPile() {
 
 	result_t* r = creerResultat();
 
 	// Création de la pile.
 	{
-		pile_t* pile = initPile(5);
-		assertion(r, pile->taille == 0, "Pile vide => taille 0"); //TODO: taille: taille max de la pile.
-		assertion(r, pile->tete == 0, "Pile vide => tete 0"); //TODO: pile vide => tete=-1.
+		donnee_t* s;
+		pile_t* pile = initPile(3);
+
+		OUTPUT(s, SORTIE, pileToString(pile));
+
+		ajouterDonnee(assertion(r, pile->tete == -1, "Création d'une pile vide"), s);
+		libererPile(pile);
 	}
-
 	return r;
-
 }
 
 result_t* test_empiler() {
