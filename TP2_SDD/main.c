@@ -12,13 +12,14 @@ int main(int argc, char** argv) {
 	printf("test\n");
 
 	a = creerArbre("1*(2+3)");
-
-
-
 	printf("%d\n",(int)a->valeur);
 	printf("%d\n",(int)a->lv->valeur);
 	printf("%d\n",(int)a->lv->lh->valeur);
 
+	a = creerArbre("1*(2+3+4*5*(6+7))");
+	printf("%d\n",(int)a->valeur);
+	printf("%d\n",(int)a->lv->valeur);
+	printf("%d\n",(int)a->lv->lh->valeur);
 
 	exit(0);
 
