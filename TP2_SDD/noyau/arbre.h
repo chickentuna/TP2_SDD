@@ -20,7 +20,9 @@ typedef struct bloc_arbre {
 /**************************************************************************************
  *          PROTOTYPES
  **************************************************************************************/
-arbre_t * initArbre(char * str);
-elem_t obtenirValeur(char * str, int c);
+arbre_t * creerArbre(char * str);
+elem_t obtenirValeur(char * str, int *c);
+char obtenirOperation(char * str, int *c);
+char * obtenirSuivant(char * str, int *c);
 
 #endif

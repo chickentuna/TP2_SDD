@@ -4,8 +4,20 @@
 #include "noyau/pile.h"
 #include "testlib/testlib.h"
 #include "tests/tests.h"
+#include "noyau/arbre.h"
+
 
 int main(int argc, char** argv) {
+	arbre_t * a = NULL;
+	printf("test\n");
+
+
+
+	printf("%d\n",(int)a);
+
+	exit(0);
+
+
 
 	test_t* test_head = NULL;
 

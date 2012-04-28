@@ -1,11 +1,4 @@
-﻿/*
- * element.h
- *
- *  Created on: 28 avr. 2012
- *      Author: Loup
- */
-
-#ifndef ELEMENT_H_
+﻿#ifndef ELEMENT_H_
 #define ELEMENT_H_
 
 #include "stdio.h"
