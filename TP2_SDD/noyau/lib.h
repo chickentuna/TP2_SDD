@@ -5,6 +5,9 @@
  *          INCLUSIONS
  **************************************************************************************/
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
 
 /**************************************************************************************
  *          CONSTANTES & MACROS
@@ -13,6 +16,8 @@
 /* Constantes booléennes classiques. */
 #define VRAI 1
 #define FAUX 0
+
+
 
 /**
  * Macro ALLOC :
@@ -26,6 +31,7 @@
  */
 #define ALLOC(N,T) (T*) malloc(N*sizeof(T))
 
+char* str_join(char *cs, ...);
 
 #endif
 

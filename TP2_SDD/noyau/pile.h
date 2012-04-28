@@ -2,14 +2,14 @@
 #define PILE_H_
 
 #include "lib.h"
+#include "element.h"
 
 /**************************************************************************************
  *          STRUCTURES & TYPES
  **************************************************************************************/
-typedef int elem;
 
 typedef struct bloc_pile {
-	elem * tab;
+	elem_t* tab;
 	int taille;
 	int tete;
 } pile_t;
@@ -39,7 +39,7 @@ pile_t * creerPile(int taille);
  * 	element - élément à empiler.
  * 	pile - pile sur laquelle on empile.
  */
-void empiler(elem element, pile_t * pile);
+void empiler(elem_t element, pile_t * pile);
 
 /**
  * Fonction depiler :
@@ -50,7 +50,7 @@ void empiler(elem element, pile_t * pile);
  * @sortie
  *  L'élément dépilé.
  */
-elem depiler(pile_t * pile);
+elem_t depiler(pile_t * pile);
 
 /**
  * Fonction vide :
@@ -89,7 +89,7 @@ void libererPile(pile_t * pile);
  *  Convertit une pile en une chaine de caractères.
  *  Utilisée pour les sorties des fonctions de tests.
  */
-char * pileToString(pile_t * pile);
+char* pileToString(pile_t * pile, strel_f to_string);
 
 #endif
 

@@ -6,24 +6,24 @@
 pile_t * creerPile(int taille) {
 	pile_t * nouv;
 
-	nouv = ALLOC(1,pile_t);
-	nouv->tab = ALLOC(taille,elem);
+	nouv = ALLOC(1, pile_t);
+	nouv->tab = ALLOC(taille, elem_t);
 	nouv->tete = -1;
 	nouv->taille = taille;
 	return nouv;
 }
 
-void empiler(elem element, pile_t * pile) {
+void empiler(elem_t element, pile_t* pile) {
 	if (!pleine(pile)) {
 		pile->tab[++pile->tete] = element;
 	}
 }
 
-elem depiler(pile_t * pile) {
+elem_t depiler(pile_t* pile) {
 	if (!vide(pile)) {
 		return pile->tab[pile->tete--];
 	}
-	return (elem) NULL;
+	return (elem_t) NULL;
 }
 
 int vide(pile_t * pile) {
@@ -39,24 +39,33 @@ void libererPile(pile_t * pile) {
 	free(pile);
 }
 
-char * pileToString(pile_t * pile) {
-	char * buf;
+char* pileToString(pile_t * pile, strel_f to_string) {
+	char* buf = NULL;
+	char* old_buf = NULL;
 	int i;
 
 	if (vide(pile)) {
-		buf = ALLOC(5,char);
-		strcpy(buf,"vide");
+		buf = ALLOC(5, char);
+		strcpy(buf, "vide");
 	} else {
-	buf = ALLOC((pile->tete+1)*5+1,char);
-		sprintf(buf,"[");
-		for (i=0;i<pile->tete+1;i++) {
-			sprintf(buf,"%s%d",buf,pile->tab[i]);
-			if (i==pile->tete)
-				sprintf(buf,"%s]",buf);
-			else
-				sprintf(buf,"%s|",buf);
+		buf = ALLOC(2, char);
+		strcpy(buf, "[");
+		for (i = 0; i < pile->tete + 1; i++) {
+
+			old_buf = buf;
+
+			char* el = (*to_string)(pile->tab[i]);
+			buf = str_join("", buf, " ", el, NULL);
+
+			free(old_buf);
+			free(el);
+
 		}
+		old_buf = buf;
+		buf = str_join("", buf, " ]", NULL);
+		free(old_buf);
 	}
+
 	return buf;
 }
 

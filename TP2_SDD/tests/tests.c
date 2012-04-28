@@ -13,9 +13,10 @@ result_t* test_creerPile() {
 		donnee_t* s;
 		pile_t* pile = creerPile(3);
 
-		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile, elementToString));
 
-		ajouterDonnee(assertion(r, pile->tete == -1, "Création d'une pile vide"), s);
+		ajouterDonnee(
+				assertion(r, pile->tete == -1, "Création d'une pile vide"), s);
 		libererPile(pile);
 	}
 	return r;
@@ -31,18 +32,18 @@ result_t* test_empiler() {
 		donnee_t* s;
 		int i;
 
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
 		}
 
 		assert_t* assert = assertion(r,
-				pile->tete == 2 && pile->tab[0] == 1
-				&& pile->tab[1] == 2 && pile->tab[2] == 3,
+				pile->tete == 2 && pile->tab[0] == 1 && pile->tab[1] == 2
+						&& pile->tab[2] == 3,
 				"Cas général (empilement de 1,2,3)");
 
-		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile, elementToString));
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -60,15 +61,15 @@ result_t* test_empiler() {
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
 		}
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		empiler(4, pile);
 		assert_t* assert = assertion(r,
-				pile->tete == 2 && pile->tab[0] == 1 &&
-				pile->tab[1] == 2 && pile->tab[2] == 3,
+				pile->tete == 2 && pile->tab[0] == 1 && pile->tab[1] == 2
+						&& pile->tab[2] == 3,
 				"Cas de la pile pleine (empilement de 4)");
 
-		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile, elementToString));
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -95,7 +96,7 @@ result_t* test_depiler() {
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
 		}
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		for (i = 0; i < 3; i++)
 			elems[i] = depiler(pile);
@@ -103,7 +104,7 @@ result_t* test_depiler() {
 		assert_t* assert = assertion(r, pile->tete = -1,
 				"Cas général (3 depilements)");
 
-		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile, elementToString));
 
 		buf = ALLOC(6,char);
 		sprintf(buf, "%d,%d,%d", elems[0], elems[1], elems[2]);
@@ -123,13 +124,13 @@ result_t* test_depiler() {
 		donnee_t* e;
 		donnee_t* s;
 
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		depiler(pile);
 		assert_t* assert = assertion(r, pile->tete == -1,
 				"Cas de la pile vide");
 
-		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile, elementToString));
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -150,7 +151,7 @@ result_t* test_vide() {
 		donnee_t* s;
 		int res;
 
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		res = vide(pile);
 		assert_t* assert = assertion(r, res, "Cas de la pile vide");
@@ -173,7 +174,7 @@ result_t* test_vide() {
 		for (i = 1; i < 4; i++)
 			empiler(i, pile);
 
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		res = vide(pile);
 		assert_t* assert = assertion(r, !res, "Cas de la pile non vide");
@@ -200,7 +201,8 @@ result_t* test_pleine() {
 		for (i = 1; i < 4; i++)
 			empiler(i, pile);
 
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		char* buf = pileToString(pile, elementToString);
+		creerTamponDonnee(e, TYPE_ENTREE, buf);
 
 		res = pleine(pile);
 
@@ -223,7 +225,7 @@ result_t* test_pleine() {
 		for (i = 1; i < 3; i++)
 			empiler(i, pile);
 
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile, elementToString));
 
 		res = pleine(pile);
 		assert_t* assert = assertion(r, !res, "Cas de la pile non pleine");

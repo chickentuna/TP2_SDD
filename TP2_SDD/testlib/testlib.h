@@ -20,6 +20,14 @@
 #undef ALLOC
 #define ALLOC(_n,_t) (_t*) malloc(_n*sizeof(_t))
 
+#define CHECK_PARAMETER(_par, _mess) { \
+	if ((_par) == NULL) { \
+		fprintf(stderr, _mess); \
+		fprintf(stderr, "\n"); \
+		exit(EXIT_FAILURE); \
+	} \
+}
+
 #define FOR_EACH(list, size, el, actions) {							\
 	int compteur;													\
 	if (list != NULL && size > 0) {									\
