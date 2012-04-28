@@ -23,5 +23,8 @@
 result_t* test_initPile();
 result_t* test_empiler();
 result_t* test_depiler();
+result_t* test_vide();
+result_t* test_pleine();
+
 
 #endif /* TESTS_H_ */
