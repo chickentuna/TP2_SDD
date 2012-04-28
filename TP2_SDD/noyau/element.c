@@ -17,6 +17,6 @@ char* elementToString(elem_t el) {
 }
 
 elem_t stringToElement(char* value) {
-	return value[0];
+	return atoi(value);
 }
 
