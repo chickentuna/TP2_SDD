@@ -101,5 +101,7 @@ int pleine(pile_t * pile);
  */
 void libererPile(pile_t * pile);
 
+char * pileToString(pile_t * pile);
+
 #endif
 

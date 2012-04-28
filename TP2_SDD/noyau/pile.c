@@ -1,5 +1,7 @@
-#include "lib.h"
+#include "pile.h"
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 pile_t * initPile(int taille) {
 	pile_t * nouv;
@@ -36,3 +38,25 @@ void libererPile(pile_t * pile) {
 	free(pile->tab);
 	free(pile);
 }
+
+char * pileToString(pile_t * pile) {
+	char * buf;
+	int i;
+
+	if (vide(pile)) {
+		buf = ALLOC(5,char);
+		strcpy(buf,"vide");
+	} else {
+	buf = ALLOC((pile->tete+1)*5+1,char);
+		sprintf(buf,"[");
+		for (i=0;i<pile->tete+1;i++) {
+			sprintf(buf,"%s%d",buf,pile->tab[i]);
+			if (i==pile->tete)
+				sprintf(buf,"%s]",buf);
+			else
+				sprintf(buf,"%s|",buf);
+		}
+	}
+	return buf;
+}
+

@@ -30,6 +30,12 @@
 	}														\
 }
 
+#define OUTPUT(var,data,str) {		\
+	char *buf = str;				\
+	var = creerDonnee(data, buf);	\
+	free(buf);						\
+}
+
 #define creerTamponDonnee(donnee, type, texte) {	\
 	char *tampon = texte;							\
 	donnee = creerDonnee(type, tampon);				\
