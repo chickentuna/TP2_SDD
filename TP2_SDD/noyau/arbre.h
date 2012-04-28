@@ -1,5 +1,5 @@
-﻿#ifndef PILE_H_
-#define PILE_H_
+﻿#ifndef ARBRE_H_
+#define ARBRE_H_
 
 #include "lib.h"
 #include "element.h"

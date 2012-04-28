@@ -14,6 +14,9 @@ arbre_t * creerArbre(char * str) {
 	} else*/ if (str[c]!='\0') {
 		val = obtenirValeur(str, &c);
 		nouv->valeur = val;
+		nouv->lv = NULL;
+		nouv->lh = NULL;
+
 		op = obtenirOperation(str, &c);
 		buf = obtenirSuivant(str, &c);
 		suiv = creerArbre(buf);
@@ -84,7 +87,7 @@ elem_t obtenirValeur(char * str, int *c) {
 	char *buf;
 	elem_t res;
 
-	while (str[i] != '(' && str[i] != ')' && str[i] != '+' && str[i] != '*') {
+	while (str[i] != ')' && str[i] != '+' && str[i] != '*') {
 		i++;
 	}
 	buf = ALLOC(i-*c+1,char);
