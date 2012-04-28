@@ -7,8 +7,6 @@
 
 int main(int argc, char** argv) {
 
-	printf("%d",(int)NULL);
-
 	test_t* test_head = NULL;
 
 	AJOUTE_TEST(&test_head, empiler);
