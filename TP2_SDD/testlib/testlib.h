@@ -30,20 +30,19 @@
 	}														\
 }
 
-#define OUTPUT(var,data,str) {		\
-	char *buf = str;				\
-	var = creerDonnee(data, buf);	\
-	free(buf);						\
-}
-
 #define creerTamponDonnee(donnee, type, texte) {	\
-	char *tampon = texte;							\
+	char* tampon = texte;							\
 	donnee = creerDonnee(type, tampon);				\
 	free(tampon);									\
 }
 
-#define ENTREE "Entrée"
-#define SORTIE "Sortie"
+#define creerBoolDonnee(donnee, type, condition) {					\
+	creerTamponDonnee(donnee, type, (condition ? "VRAI" : "FAUX"));	\
+}
+
+#define TYPE_ENTREE "Entrée"
+#define TYPE_SORTIE "Sortie"
+#define TYPE_RETOUR "Retour"
 
 #define VRAI 1
 #define FAUX 0
@@ -98,7 +97,7 @@ typedef struct test_s {
  * @renvoie
  * 	Un pointeur vers test_t.
  */
-#define AJOUTE_TEST(__head, __func) creerTest(__head, test_##__func, #__func)
+#define AJOUTE_TEST(__head, __func) creerTest(&__head, test_##__func, #__func)
 
 /**************************************************************************************
  *          PROTOTYPES
