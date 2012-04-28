@@ -31,7 +31,7 @@ typedef struct bloc_pile {
  * @sortie
  *  Un pointeur sur la nouvelle pile.
  */
-pile_t * initPile(int taille);
+pile_t * creerPile(int taille);
 
 /**
  * Fonction empiler :

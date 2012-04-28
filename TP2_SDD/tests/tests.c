@@ -4,16 +4,16 @@
 
 #include "tests.h"
 
-result_t* test_initPile() {
 
+result_t* test_creerPile() {
 	result_t* r = creerResultat();
 
 	// Création de la pile.
 	{
 		donnee_t* s;
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 
-		OUTPUT(s, SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
 
 		ajouterDonnee(assertion(r, pile->tete == -1, "Création d'une pile vide"), s);
 		libererPile(pile);
@@ -26,23 +26,23 @@ result_t* test_empiler() {
 
 	//Cas général
 	{
-		pile_t* pile = initPile(10);
+		pile_t* pile = creerPile(10);
 		donnee_t* e;
 		donnee_t* s;
 		int i;
 
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
 		}
 
 		assert_t* assert = assertion(r,
-				pile->tete == 2 && pile->tab[0] == 1 && pile->tab[1] == 2
-						&& pile->tab[2] == 3,
+				pile->tete == 2 && pile->tab[0] == 1
+				&& pile->tab[1] == 2 && pile->tab[2] == 3,
 				"Cas général (empilement de 1,2,3)");
 
-		OUTPUT(s, SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -52,7 +52,7 @@ result_t* test_empiler() {
 
 	//Cas de la pile pleine
 	{
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int i;
@@ -60,15 +60,15 @@ result_t* test_empiler() {
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
 		}
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		empiler(4, pile);
 		assert_t* assert = assertion(r,
-				pile->tete == 2 && pile->tab[0] == 1 && pile->tab[1] == 2
-						&& pile->tab[2] == 3,
+				pile->tete == 2 && pile->tab[0] == 1 &&
+				pile->tab[1] == 2 && pile->tab[2] == 3,
 				"Cas de la pile pleine (empilement de 4)");
 
-		OUTPUT(s, SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -84,7 +84,7 @@ result_t* test_depiler() {
 
 	//Cas général
 	{
-		pile_t* pile = initPile(10);
+		pile_t* pile = creerPile(10);
 		donnee_t* e;
 		donnee_t* s;
 		donnee_t* l;
@@ -95,7 +95,7 @@ result_t* test_depiler() {
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
 		}
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 0; i < 3; i++)
 			elems[i] = depiler(pile);
@@ -103,7 +103,8 @@ result_t* test_depiler() {
 		assert_t* assert = assertion(r, pile->tete = -1,
 				"Cas général (3 depilements)");
 
-		OUTPUT(s, SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
+
 		buf = ALLOC(6,char);
 		sprintf(buf, "%d,%d,%d", elems[0], elems[1], elems[2]);
 		l = creerDonnee("Retour", buf);
@@ -118,17 +119,17 @@ result_t* test_depiler() {
 
 	//Cas de la pile vide
 	{
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 		donnee_t* e;
 		donnee_t* s;
 
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		depiler(pile);
 		assert_t* assert = assertion(r, pile->tete == -1,
 				"Cas de la pile vide");
 
-		OUTPUT(s, SORTIE, pileToString(pile));
+		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -144,51 +145,40 @@ result_t* test_vide() {
 
 	//Cas pile vide
 	{
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res;
-		char *buf;
 
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		res = vide(pile);
 		assert_t* assert = assertion(r, res, "Cas de la pile vide");
 
-		if (res)
-			buf = "VRAI";
-		else
-			buf = "FAUX";
-		s = creerDonnee("Retour", buf);
-		free(buf);
+		creerBoolDonnee(s, TYPE_RETOUR, res);
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
+
 		libererPile(pile);
 	}
 
 	//Cas de la pile non vide
 	{
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res, i;
-		char *buf;
 
 		for (i = 1; i < 4; i++)
 			empiler(i, pile);
 
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		res = vide(pile);
 		assert_t* assert = assertion(r, !res, "Cas de la pile non vide");
 
-		if (res)
-			buf = "VRAI";
-		else
-			buf = "FAUX";
-		s = creerDonnee("Retour", buf);
-		free(buf);
+		creerBoolDonnee(s, TYPE_RETOUR, res);
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -202,26 +192,21 @@ result_t* test_pleine() {
 
 	//Cas de la pile pleine
 	{
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res, i;
-		char *buf;
 
 		for (i = 1; i < 4; i++)
 			empiler(i, pile);
 
-		OUTPUT(e, ENTREE, pileToString(pile));
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		res = pleine(pile);
+
 		assert_t* assert = assertion(r, res, "Cas de la pile pleine");
 
-		if (res)
-			buf = "VRAI";
-		else
-			buf = "FAUX";
-		s = creerDonnee("Retour", buf);
-		free(buf);
+		creerBoolDonnee(s, TYPE_RETOUR, res);
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
@@ -230,28 +215,24 @@ result_t* test_pleine() {
 
 	//Cas pile non pleine
 	{
-		pile_t* pile = initPile(3);
+		pile_t* pile = creerPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res, i;
-		char *buf;
 
 		for (i = 1; i < 3; i++)
-					empiler(i, pile);
-		OUTPUT(e, ENTREE, pileToString(pile));
+			empiler(i, pile);
+
+		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		res = pleine(pile);
 		assert_t* assert = assertion(r, !res, "Cas de la pile non pleine");
 
-		if (res)
-			buf = "VRAI";
-		else
-			buf = "FAUX";
-		s = creerDonnee("Retour", buf);
-		free(buf);
+		creerBoolDonnee(s, TYPE_RETOUR, res);
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
+
 		libererPile(pile);
 	}
 	return r;

@@ -20,45 +20,44 @@
 #undef ALLOC
 #define ALLOC(_n,_t) (_t*) malloc(_n*sizeof(_t))
 
-#define FOR_EACH(list, size, el, actions) {					\
-	int compteur;											\
-	if (list != NULL && size > 0) {							\
-		for (compteur = 0 ; compteur < size ; compteur++) {	\
-			typeof(list[0]) el = list[compteur];			\
-			actions											\
-		}													\
-	}														\
+#define FOR_EACH(list, size, el, actions) {							\
+	int compteur;													\
+	if (list != NULL && size > 0) {									\
+		for (compteur = 0 ; compteur < size ; compteur++) {			\
+			typeof(list[0]) el = list[compteur];					\
+			actions													\
+		}															\
+	}																\
 }
 
-#define OUTPUT(var,data,str) {		\
-	char *buf = str;				\
-	var = creerDonnee(data, buf);	\
-	free(buf);						\
+#define creerTamponDonnee(donnee, type, texte) {					\
+	char* tampon = texte;											\
+	donnee = creerDonnee(type, tampon);								\
+	free(tampon);													\
 }
 
-#define creerTamponDonnee(donnee, type, texte) {	\
-	char *tampon = texte;							\
-	donnee = creerDonnee(type, tampon);				\
-	free(tampon);									\
+#define creerBoolDonnee(donnee, type, condition) {					\
+	creerTamponDonnee(donnee, type, (condition ? "VRAI" : "FAUX"));	\
 }
 
-#define ENTREE "Entrée"
-#define SORTIE "Sortie"
+#define TYPE_ENTREE						"Entrée"
+#define TYPE_SORTIE						"Sortie"
+#define TYPE_RETOUR						"Retour"
 
-#define VRAI 1
-#define FAUX 0
+#define VRAI							1
+#define FAUX							0
 
-#define REUSSI 1
-#define ECHOUE 0
+#define REUSSI							1
+#define ECHOUE							0
 
-#define ASSERTION_LIST_MAX_SIZE 10
-#define DATA_LIST_MAX_SIZE 10
+#define ASSERTION_LIST_MAX_SIZE			20
+#define DATA_LIST_MAX_SIZE				20
 
 typedef unsigned char flag_t;
 
-#define FLAG_EMPTY					0
-#define FLAG_HIDE_ASSERTS			1
-#define FLAG_HIDE_DATAS				2
+#define FLAG_EMPTY						0
+#define FLAG_HIDE_ASSERTS				1
+#define FLAG_HIDE_DATAS					2
 
 /**************************************************************************************
  *          STRUCTURES & TYPES
@@ -98,7 +97,7 @@ typedef struct test_s {
  * @renvoie
  * 	Un pointeur vers test_t.
  */
-#define AJOUTE_TEST(__head, __func) creerTest(__head, test_##__func, #__func)
+#define AJOUTE_TEST(__head, __func) creerTest(&__head, test_##__func, #__func)
 
 /**************************************************************************************
  *          PROTOTYPES

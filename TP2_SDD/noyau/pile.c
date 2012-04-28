@@ -1,6 +1,6 @@
 #include "pile.h"
 
-pile_t * initPile(int taille) {
+pile_t * creerPile(int taille) {
 	pile_t * nouv;
 
 	nouv = ALLOC(1,pile_t);
