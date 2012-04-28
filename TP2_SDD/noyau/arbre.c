@@ -1,7 +1,7 @@
 ﻿#include "arbre.h"
 
 arbre_t * creerArbre(char * str) {
-	arbre_t *nouv;
+	arbre_t *nouv = NULL;
 	arbre_t *suiv;
 	nouv = ALLOC(1,arbre_t);
 	int c = 0;
@@ -9,17 +9,18 @@ arbre_t * creerArbre(char * str) {
 	char op;
 	char *buf;
 
-	if (str[c] == '(') {
-		c++;
-	}
-	if (str[c]!='\0') {
+	while (str[c] != '\0') {
+		if (str[c] == '(' || str[c] == ')') {
+			c++;
+		}
+
 		val = obtenirValeur(str, &c);
 		nouv->valeur = val;
 		nouv->lv = NULL;
 		nouv->lh = NULL;
 
 		op = obtenirOperation(str, &c);
-		if (op=='\0') {
+		if (op == '\0') {
 			return nouv;
 		}
 
@@ -32,13 +33,13 @@ arbre_t * creerArbre(char * str) {
 		} else if (op == '*') {
 			nouv->lv = suiv;
 		} else {
-			printf("Erreur de chargement d'arbre à la position %d : '%c'", c, str[c]);
-			printf("String: %s",str);
+			printf("Erreur de chargement d'arbre à la position %d : '%c'", c,
+					str[c]);
+			printf("String: %s", str);
 			exit(EXIT_FAILURE);
 		}
-		return nouv;
 	}
-	return NULL;
+	return nouv;
 }
 
 char * obtenirSuivant(char * str, int *c) {
@@ -82,7 +83,7 @@ char * obtenirSuivant(char * str, int *c) {
 char obtenirOperation(char * str, int *c) {
 	while (str[*c] == ' ')
 		(*c)++;
-	if (str[(*c)]=='*' || str[(*c)]=='+') {
+	if (str[(*c)] == '*' || str[(*c)] == '+') {
 		return str[(*c)++];
 	} else
 		return '\0';
@@ -105,7 +106,7 @@ elem_t obtenirValeur(char * str, int *c) {
 	}
 	buf[n] = '\0';
 	*c = i;
-	printf(">%s\n",buf);
+	printf(">%s\n", buf);
 	res = stringToElement(buf);
 	free(buf);
 	return res;
