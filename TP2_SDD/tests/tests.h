@@ -20,6 +20,8 @@
  * est cohérent.
  */
 
+result_t* test_initPile();
 result_t* test_empiler();
+result_t* test_depiler();
 
 #endif /* TESTS_H_ */
