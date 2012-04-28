@@ -1,25 +1,7 @@
-/**************************************************************************************
- *          CONSTANTES & MACROS
- **************************************************************************************/
+#ifndef PILE_H_
+#define PILE_H_
 
-#ifndef LIB_H_
-#define LIB_H_
-
-/* Constantes booléennes classiques. */
-#define VRAI 1
-#define FAUX 0
-
-/**
- * Macro ALLOC :
- * @description
- *  Macro d'allocation mémoire.
- * @param
- *  _n - taille du tableau d'éléments
- *  _t - type des éléments
- * @sortie
- * 	Un pointeur vers une mémoire de taille adéquate.
- */
-#define ALLOC(N,T) (T*) malloc(N*sizeof(T))
+#include "lib.h"
 
 /**************************************************************************************
  *          STRUCTURES & TYPES
