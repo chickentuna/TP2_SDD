@@ -92,7 +92,7 @@ void libererPile(pile_t * pile);
  *  Convertit une pile en une chaine de caractères.
  *  Utilisée pour les sorties des fonctions de tests.
  */
-char* pileToString(pile_t * pile, strel_f to_string);
+char* pileToString(pile_t * pile);
 
 #endif
 

@@ -36,7 +36,7 @@ void libererPile(pile_t * pile) {
 	free(pile);
 }
 
-char* pileToString(pile_t * pile, strel_f to_string) {
+char* pileToString(pile_t * pile) {
 	char* buf = NULL;
 	char* old_buf = NULL;
 	int i;
@@ -51,7 +51,7 @@ char* pileToString(pile_t * pile, strel_f to_string) {
 
 			old_buf = buf;
 
-			char* el = (*to_string)(pile->tab[i]);
+			char* el = elementToString(pile->tab[i]);
 			buf = str_join("", buf, " ", el, NULL);
 
 			free(old_buf);
