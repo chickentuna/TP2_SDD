@@ -10,7 +10,7 @@ arbre_t * creerArbre(char * str) {
 	char op;
 	char *buf;
 
-	if (str[c] == '(' || str[c] == ')') {
+	while (str[c] == '(' || str[c] == ')') {
 		c++;
 	}
 	if (str[c] == '\0')
@@ -34,6 +34,7 @@ arbre_t * creerArbre(char * str) {
 		free(buf);
 		if (op == '+') {
 			nouv->lh = suiv;
+			nouv = suiv;
 
 		} else if (op == '*') {
 			nouv->lv = suiv;
@@ -43,7 +44,7 @@ arbre_t * creerArbre(char * str) {
 			printf("String: %s", str);
 			exit(EXIT_FAILURE);
 		}
-		nouv = suiv;
+
 	}
 	return racine;
 }
@@ -117,3 +118,51 @@ elem_t obtenirValeur(char * str, int *c) {
 	return res;
 }
 
+
+int countNodes(arbre_t* arbre) {
+	int c = 0;
+	arbre_t* cur;
+
+	if (arbre != NULL) {
+		for (cur = arbre; cur != NULL; cur = cur->lh) {
+			c += countNodes(cur->lv) + 1;
+		}
+	}
+
+	return c;
+}
+
+int deepSizeTree(arbre_t* arbre) {
+	int size = 0;
+	int total = 0;
+	arbre_t* cur_lv;
+	arbre_t* cur_lh;
+
+	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
+		size = 1;
+		for (cur_lv = cur_lh; cur_lv != NULL; cur_lv = cur_lv->lv) {
+			size++;
+		}
+		if (size > total) {
+			total = size;
+		}
+	}
+
+	return total;
+}
+
+int countLeafTree(arbre_t* arbre) {
+	int total = 0;
+	arbre_t* cur_lv;
+	arbre_t* cur_lh;
+
+	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
+		cur_lv = cur_lh;
+		while (cur_lv != NULL) {
+			cur_lv = cur_lv->lv;
+		}
+		total++;
+	}
+
+	return total;
+}
