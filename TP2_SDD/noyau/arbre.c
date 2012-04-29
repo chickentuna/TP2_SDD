@@ -117,51 +117,64 @@ elem_t obtenirValeur(char * str, int *c) {
 	return res;
 }
 
-int countNodes(arbre_t* arbre) {
-	int c = 0;
-	arbre_t* cur;
+#define BEGIN_DFS(arbre) {									\
+	if (arbre != NULL) {									\
+															\
+		lpile_t* _pile = createLPile(arbre);				\
+															\
+		while (!empty(_pile)) {								\
+			arbre_t* _node;									\
+			pop_from(_pile, _node);							\
+			while (_node != NULL) {							\
+				if (_node->lh != NULL) {					\
+					push_into(_pile, _node->lh);			\
+				}											\
 
-	if (arbre != NULL) {
-		for (cur = arbre; cur != NULL; cur = cur->lh) {
-			c += countNodes(cur->lv) + 1;
-		}
-	}
-
-	return c;
+#define END_DFS()											\
+				_node = _node->lv;							\
+			}												\
+		}													\
+	}														\
 }
 
-int deepSizeTree(arbre_t* arbre) {
-	int size = 0;
+int compterNoeuds(arbre_t* arbre) {
 	int total = 0;
-	arbre_t* cur_lv;
-	arbre_t* cur_lh;
 
-	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
-		size = 1;
-		for (cur_lv = cur_lh; cur_lv != NULL; cur_lv = cur_lv->lv) {
-			size++;
-		}
-		if (size > total) {
-			total = size;
-		}
-	}
+	BEGIN_DFS(arbre)
+
+	total++;
+
+	END_DFS()
 
 	return total;
 }
 
-int countLeafTree(arbre_t* arbre) {
+int mesurerProfondeur(arbre_t* arbre) {
 	int total = 0;
-	arbre_t* cur_lv;
-	arbre_t* cur_lh;
 
-	//TODO: make this a while.
-	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
-		cur_lv = cur_lh;
-		while (cur_lv != NULL) {
-			cur_lv = cur_lv->lv;
-		}
+	BEGIN_DFS(arbre)
+
+	if (_node->lv == NULL) {
+		total--;
+	} else {
 		total++;
 	}
+
+	END_DFS()
+
+	return total;
+}
+
+int compterFeuilles(arbre_t* arbre) {
+	int total = 0;
+
+	BEGIN_DFS(arbre)
+
+	if (_node->lv == NULL) {
+		total++;
+	}
+
+	END_DFS()
 
 	return total;
 }
@@ -194,7 +207,7 @@ char * arbreToString(arbre_t * arbre) {
 	arbre_t * cour;
 	int n;
 
-	n = countNodes(arbre);
+	n = compterNoeuds(arbre);
 	buf = ALLOC(n*5+3,char);
 	sprintf(buf, "{ ");
 	pile_t * p;

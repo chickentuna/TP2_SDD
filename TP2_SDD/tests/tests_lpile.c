@@ -23,9 +23,12 @@ result_t* test_pushLPile() {
 			pushLPile(&pile, pi);
 		}
 
-		int *a = extract(int, pile);
-		int *b = extract(int, pile->next);
-		int *c = extract(int, pile->next->next);
+		int *a;
+		pop_from(pile, a);
+		int *b;
+		pop_from(pile, b);
+		int *c;
+		pop_from(pile, c);
 
 		assertion(r, *a == 3 && *b == 2 && *c == 1,
 				"Cas général (empilement de 1,2,3)");

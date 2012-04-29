@@ -1,7 +1,15 @@
 #ifndef __LINKED_LIST_H
 #define __LINKED_LIST_H
 
-#define extract(type, pile) ((type*)(pile)->addr)
+#define push_into(pile, el) \
+	{ pushLPile(&(pile), (el)); }
+
+#define pop_from(pile, var) {			\
+	lpile_t* __el = popLPile(&(pile));	\
+	var = ((typeof(var))__el->addr);	\
+	free(__el);						}	\
+
+#define empty(pile) estVideLPile(pile)
 
 #include "stdio.h"
 #include "string.h"

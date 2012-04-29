@@ -2,6 +2,7 @@
 #define ARBRE_H_
 
 #include "lib.h"
+#include "list.h"
 #include "element.h"
 
 /**************************************************************************************
@@ -26,8 +27,8 @@ char * obtenirSuivant(char * str, int *c);
 char * arbreToString(arbre_t * arbre);
 void detruireArbre(arbre_t * arbre);
 
-int countNodes(arbre_t* arbre);
-int deepSizeTree(arbre_t* arbre);
-int countLeafTree(arbre_t* arbre);
+int compterNoeuds(arbre_t* arbre);
+int mesurerProfondeur(arbre_t* arbre);
+int compterFeuilles(arbre_t* arbre);
 
 #endif
