@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
 
 	AJOUTE_TEST(test_head, countNodes);
 	AJOUTE_TEST(test_head, deepSizeTree);
+	AJOUTE_TEST(test_head, countLeafTree);
 
 	executerTests(test_head, FLAG_EMPTY);
 	detruireTests(test_head);

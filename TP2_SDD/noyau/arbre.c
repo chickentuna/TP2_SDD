@@ -143,3 +143,19 @@ int deepSizeTree(arbre_t* arbre) {
 
 	return total;
 }
+
+int countLeafTree(arbre_t* arbre) {
+	int total = 0;
+	arbre_t* cur_lv;
+	arbre_t* cur_lh;
+
+	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
+		cur_lv = cur_lh;
+		while (cur_lv != NULL) {
+			cur_lv = cur_lv->lv;
+		}
+		total++;
+	}
+
+	return total;
+}

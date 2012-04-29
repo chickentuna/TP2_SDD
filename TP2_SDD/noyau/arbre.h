@@ -25,5 +25,6 @@ char * obtenirSuivant(char * str, int *c);
 
 int countNodes(arbre_t* arbre);
 int deepSizeTree(arbre_t* arbre);
+int countLeafTree(arbre_t* arbre);
 
 #endif

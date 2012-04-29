@@ -29,5 +29,6 @@ result_t* test_pleine();
 
 result_t* test_countNodes();
 result_t* test_deepSizeTree();
+result_t* test_countLeafTree();
 
 #endif /* TESTS_H_ */
