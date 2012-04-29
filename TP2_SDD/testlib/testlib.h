@@ -51,6 +51,7 @@
 #define TYPE_ENTREE						"Entrée"
 #define TYPE_SORTIE						"Sortie"
 #define TYPE_RETOUR						"Retour"
+#define TYPE_DUMP						"Dump"
 
 #define VRAI							1
 #define FAUX							0

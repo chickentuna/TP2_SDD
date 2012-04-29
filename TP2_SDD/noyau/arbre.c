@@ -121,3 +121,7 @@ int countNodes(arbre_t* arbre) {
 	}
 	return c;
 }
+
+int deepSizeTree(arbre_t* arbre) {
+	return 1;
+}

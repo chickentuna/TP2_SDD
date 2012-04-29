@@ -8,6 +8,8 @@
 
 
 int main(int argc, char** argv) {
+
+//  TODO: pourquoi tu mets tes tests ici alors que j'ai développé un super sytème ?
 //	arbre_t * a = NULL;
 //	printf("test\n");
 //
@@ -30,6 +32,7 @@ int main(int argc, char** argv) {
 	AJOUTE_TEST(test_head, creerPile);
 
 	AJOUTE_TEST(test_head, countNodes);
+	AJOUTE_TEST(test_head, deepSizeTree);
 
 	executerTests(test_head, FLAG_EMPTY);
 	detruireTests(test_head);
