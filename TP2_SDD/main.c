@@ -17,9 +17,16 @@ int main(int argc, char** argv) {
 	printf("%d\n",(int)a->lv->lh->valeur);
 
 	a = creerArbre("1*(2+3+4*5*(6+7))");
-	printf("%d\n",(int)a->valeur);
-	printf("%d\n",(int)a->lv->valeur);
-	printf("%d\n",(int)a->lv->lh->valeur);
+	printf("%d\n",(int)a->valeur); //1
+	printf("%d\n",(int)a->lv->valeur); //2
+	printf("%d\n",(int)a->lv->lh->valeur); //3
+	printf("%d\n",(int)a->lv->lh->lh->valeur); //4
+	printf("%d\n",(int)a->lv->lh->lh->lv->valeur); //5
+	printf("%d\n",(int)a->lv->lh->lh->lv->lv->valeur); //6
+	printf("%d\n",(int)a->lv->lh->lh->lv->lv->lh->valeur); //7
+
+
+
 
 	exit(0);
 
