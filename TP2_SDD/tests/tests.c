@@ -245,7 +245,7 @@ result_t* test_creerArbre() {
 
 		{
 			donnee_t* e;
-			//donnee_t* s;
+			donnee_t* s;
 			arbre_t * a = NULL;
 			int res;
 			creerTamponDonnee(e, TYPE_ENTREE, "null");
@@ -259,14 +259,15 @@ result_t* test_creerArbre() {
 				&& (a->lv->lh->valeur = 5)
 				&& (a->lh->valeur = 6);
 
+
 			assert_t* assert = assertion(r, res, "Cas général");
 
-			//creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+			creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 
 			ajouterDonnee(assert, e);
-			//ajouterDonnee(assert, s);
+			ajouterDonnee(assert, s);
 
-			//libererArbre(arbre);
+			//detruireArbre(arbre);
 		}
 
 	return r;
