@@ -1,6 +1,7 @@
 ﻿#include "arbre.h"
 #include "pile.h"
 
+//TODO: dérécursifier. + gestion d'erreurs.
 arbre_t * creerArbre(char * str) {
 	arbre_t *nouv = NULL;
 	arbre_t * racine = NULL;
@@ -72,9 +73,7 @@ char * obtenirSuivant(char * str, int *c) {
 			}
 		}
 		i++;
-
 	}
-
 	buf = ALLOC(i-*c+1,char);
 	n = 0;
 	for (k = *c; k < i; k++) {
@@ -118,7 +117,6 @@ elem_t obtenirValeur(char * str, int *c) {
 	return res;
 }
 
-
 int countNodes(arbre_t* arbre) {
 	int c = 0;
 	arbre_t* cur;
@@ -156,6 +154,7 @@ int countLeafTree(arbre_t* arbre) {
 	arbre_t* cur_lv;
 	arbre_t* cur_lh;
 
+	//TODO: make this a while.
 	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
 		cur_lv = cur_lh;
 		while (cur_lv != NULL) {
@@ -167,10 +166,29 @@ int countLeafTree(arbre_t* arbre) {
 	return total;
 }
 
+//TODO: gestion manque de memoire
 void detruireArbre(arbre_t * arbre) {
-	/*TODO:Parcours d'un arbre en itératif avec free() dans l'ordre postfixe*/
+	arbre_t * cour;
+	arbre_t * suiv;
+	pile_t * p;
+
+	cour = arbre; /*Accès à la première racine*/
+	p = creerPile(514); /*Création de la pile*/
+	while (!vide(p) || cour != NULL) {
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			suiv = cour;
+			cour = cour->lh;/*On part sur le lien horizontal*/
+			free(suiv);
+		}
+	}
+
 }
 
+//TODO: gestion manque de memoire
 char * arbreToString(arbre_t * arbre) {
 	char * buf;
 	arbre_t * cour;
@@ -178,15 +196,15 @@ char * arbreToString(arbre_t * arbre) {
 
 	n = countNodes(arbre);
 	buf = ALLOC(n*5+3,char);
-	sprintf(buf,"{ ");
-	pile_t * p; //TODO:Ceci est une pile d'arbre.
+	sprintf(buf, "{ ");
+	pile_t * p;
 
 	cour = arbre; /*Accès à la première racine*/
 	p = creerPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-		empiler((elem_t)cour,p); /*Empiler noeud courant*/
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
-		sprintf(buf,"%s%d ",buf,cour->valeur);
+		sprintf(buf, "%s%d ", buf, cour->valeur);
 
 		cour = cour->lv;/*Descendre sur le lien vertical*/
 		while (!vide(p) && cour == NULL) {
@@ -194,10 +212,7 @@ char * arbreToString(arbre_t * arbre) {
 			cour = cour->lh;/*On part sur le lien horizontal*/
 		}
 	}
-	sprintf(buf,"%s}",buf);
+	sprintf(buf, "%s}", buf);
 	return buf;
 }
-
-
-
 

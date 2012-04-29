@@ -4,7 +4,6 @@
 
 #include "tests.h"
 
-
 result_t* test_creerPile() {
 	result_t* r = creerResultat();
 
@@ -38,7 +37,8 @@ result_t* test_empiler() {
 			empiler(i, pile);
 		}
 
-		assert_t* assert = assertion(r,
+		assert_t* assert = assertion(
+				r,
 				pile->tete == 2 && pile->tab[0] == 1 && pile->tab[1] == 2
 						&& pile->tab[2] == 3,
 				"Cas général (empilement de 1,2,3)");
@@ -60,11 +60,11 @@ result_t* test_empiler() {
 
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
-		}
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		}creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		empiler(4, pile);
-		assert_t* assert = assertion(r,
+		assert_t* assert = assertion(
+				r,
 				pile->tete == 2 && pile->tab[0] == 1 && pile->tab[1] == 2
 						&& pile->tab[2] == 3,
 				"Cas de la pile pleine (empilement de 4)");
@@ -95,8 +95,7 @@ result_t* test_depiler() {
 
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
-		}
-		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
+		}creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 0; i < 3; i++)
 			elems[i] = depiler(pile);
@@ -242,33 +241,37 @@ result_t* test_pleine() {
 
 result_t* test_creerArbre() {
 	result_t* r = creerResultat();
+	//Cas général
+	{
+		donnee_t* s;
+		arbre_t * a = NULL;
+		int res;
 
-		{
-			donnee_t* e;
-			donnee_t* s;
-			arbre_t * a = NULL;
-			int res;
-			creerTamponDonnee(e, TYPE_ENTREE, "null");
+		a = creerArbre("1*(2*(3+4)+5)+6");
 
-			a = creerArbre("1*(2*(3+4)+5)+6");
-
-			res = (a->valeur = 1)
-				&& (a->lv->valeur = 2)
-				&& (a->lv->lv->valeur = 3)
-				&& (a->lv->lv->lh->valeur = 4)
-				&& (a->lv->lh->valeur = 5)
+		res = (a->valeur = 1) && (a->lv->valeur = 2) && (a->lv->lv->valeur = 3)
+				&& (a->lv->lv->lh->valeur = 4) && (a->lv->lh->valeur = 5)
 				&& (a->lh->valeur = 6);
 
+		assert_t* assert = assertion(r, res, "Cas général");
+		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, s);
 
-			assert_t* assert = assertion(r, res, "Cas général");
+		detruireArbre(a);
+	}
+	//Cas arbre à un élément
+	{
+		donnee_t* s;
+		arbre_t * a = NULL;
+		int res;
 
-			creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
-
-			ajouterDonnee(assert, e);
-			ajouterDonnee(assert, s);
-
-			//detruireArbre(arbre);
-		}
+		a = creerArbre("1");
+		res = (a->valeur = 1 && a->lv == NULL && a->lh == NULL);
+		assert_t* assert = assertion(r, res, "Cas à un seul noeud");
+		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, s);
+		detruireArbre(a);
+	}
 
 	return r;
 }
@@ -313,7 +316,10 @@ result_t* test_countNodes() {
 
 		size = countNodes(droit);
 		assert_t* a = assertion(r, size == 4, "Cas général (droit)");
-		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (droit)", size));
+		ajouterDonnee(
+				a,
+				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (droit)",
+						size));
 	}
 	{
 		arbre_t* gauche;
@@ -323,13 +329,17 @@ result_t* test_countNodes() {
 
 		size = countNodes(gauche);
 		assert_t* a = assertion(r, size == 4, "Cas général (gauche)");
-		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (gauche)", size));
+		ajouterDonnee(
+				a,
+				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (gauche)",
+						size));
 	}
 	{
 		int size = countNodes(NULL);
 
 		assert_t* a = assertion(r, size == 0, "Cas arbre vide");
-		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds", size));
+		ajouterDonnee(a,
+				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds", size));
 	}
 	return r;
 }
@@ -371,7 +381,8 @@ result_t* test_countLeafTree() {
 		int nb = countLeafTree(head);
 
 		assert_t* a = assertion(r, nb == 2, "Cas général à droite");
-		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,
+				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
 		arbre_t* head;
@@ -380,12 +391,14 @@ result_t* test_countLeafTree() {
 		int nb = countLeafTree(head);
 
 		assert_t* a = assertion(r, nb == 2, "Cas général à gauche");
-		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,
+				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
 		int nb = deepSizeTree(NULL);
 		assert_t* a = assertion(r, nb == 0, "Cas arbre vide");
-		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,
+				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	return r;
 }
