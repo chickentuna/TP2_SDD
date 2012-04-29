@@ -149,20 +149,9 @@ int compterNoeuds(arbre_t* arbre) {
 	return total;
 }
 
+
 int mesurerProfondeur(arbre_t* arbre) {
-	int total = 0;
-
-	BEGIN_DFS(arbre)
-
-	if (_node->lv == NULL) {
-		total--;
-	} else {
-		total++;
-	}
-
-	END_DFS()
-
-	return total;
+	return 0;
 }
 
 int compterFeuilles(arbre_t* arbre) {
