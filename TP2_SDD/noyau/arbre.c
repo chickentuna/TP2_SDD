@@ -69,7 +69,6 @@ char * obtenirSuivant(char * str, int *c) {
 				if (str[i] == ')')
 					n--;
 			}
-			i++;
 		}
 		i++;
 

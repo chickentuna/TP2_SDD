@@ -27,6 +27,8 @@ result_t* test_depiler();
 result_t* test_vide();
 result_t* test_pleine();
 
+result_t* test_creerArbre();
+
 result_t* test_countNodes();
 result_t* test_deepSizeTree();
 result_t* test_countLeafTree();
