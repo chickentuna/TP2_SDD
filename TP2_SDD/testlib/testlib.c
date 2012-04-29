@@ -27,6 +27,14 @@ donnee_t* creerDonnee(const char* type, const char* texte) {
 	return d;
 }
 
+donnee_t* creerDonneeWithInt(const char* type, const char* texte, int v) {
+	char* res = ALLOC(MAX_NBCAR_INT + strlen(texte) + 1, char);
+	sprintf(res, "%s (v=%d)", texte, v);
+	donnee_t* d = creerDonnee(type, res);
+	free(res);
+	return d;
+}
+
 void detruireDonnee(donnee_t* d) {
 
 	CHECK_PARAMETER(d, "Destruction de donnée impossible : donnée nulle.");

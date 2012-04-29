@@ -1,5 +1,5 @@
 ﻿/**************************************************************************************
- * Ce fichier contient l'implémentation de tous les tests du programme.
+ *  Ce fichier contient l'implémentation de tous les tests du programme.
  **************************************************************************************/
 
 #include "tests.h"
@@ -91,7 +91,7 @@ result_t* test_depiler() {
 		donnee_t* l;
 		int i;
 		int elems[3];
-		char *buf;
+		char* buf;
 
 		for (i = 1; i < 4; i++) {
 			empiler(i, pile);
@@ -236,6 +236,23 @@ result_t* test_pleine() {
 		ajouterDonnee(assert, s);
 
 		libererPile(pile);
+	}
+	return r;
+}
+
+result_t* test_countNodes() {
+	result_t* r = creerResultat();
+	{
+		arbre_t C = {'c', NULL, NULL};
+		arbre_t B = {'b', NULL, &C};
+		arbre_t A = {'a', &B, NULL};
+
+		arbre_t* head = &A;
+
+		int size = countNodes(head);
+
+		assert_t* a = assertion(r, size == 3, "Cas général");
+		ajouterDonnee(a, creerDonneeWithInt("Info", "taille arbre", size));
 	}
 	return r;
 }

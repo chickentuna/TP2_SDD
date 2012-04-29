@@ -13,11 +13,14 @@
  *          CONSTANTES & MACROS
  **************************************************************************************/
 
+/**
+ * Type booleén.
+ */
+typedef unsigned char boolean_t;
+
 /* Constantes booléennes classiques. */
 #define VRAI 1
 #define FAUX 0
-
-
 
 /**
  * Macro ALLOC :

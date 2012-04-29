@@ -61,6 +61,8 @@
 #define ASSERTION_LIST_MAX_SIZE			20
 #define DATA_LIST_MAX_SIZE				20
 
+#define MAX_NBCAR_INT					11
+
 typedef unsigned char flag_t;
 
 #define FLAG_EMPTY						0
@@ -112,6 +114,7 @@ typedef struct test_s {
  **************************************************************************************/
 
 donnee_t* creerDonnee(const char* type, const char* texte);
+donnee_t* creerDonneeWithInt(const char* type, const char* texte, int v);
 void detruireDonnee(donnee_t* d);
 assert_t* creerAssertion(int condition, const char* nom);
 void detruireAssertion(assert_t* a);

@@ -36,6 +36,7 @@ arbre_t * creerArbre(char * str) {
 	return NULL;
 }
 
+
 char * obtenirSuivant(char * str, int *c) {
 	int i = *c;
 	int n = 0, k;
@@ -103,3 +104,11 @@ elem_t obtenirValeur(char * str, int *c) {
 	return res;
 }
 
+int countNodes(arbre_t* arbre) {
+	int c = 1;
+	arbre_t* cur;
+	for (cur = arbre->lv ; cur != NULL ; cur = cur->lh) {
+		c += countNodes(cur);
+	}
+	return c;
+}

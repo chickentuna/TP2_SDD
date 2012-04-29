@@ -8,19 +8,19 @@
 
 
 int main(int argc, char** argv) {
-	arbre_t * a = NULL;
-	printf("test\n");
-
-	a = creerArbre("1*(2+3)");
-
-
-
-	printf("%d\n",(int)a->valeur);
-	printf("%d\n",(int)a->lv->valeur);
-	printf("%d\n",(int)a->lv->lh->valeur);
-
-
-	exit(0);
+//	arbre_t * a = NULL;
+//	printf("test\n");
+//
+//	a = creerArbre("1*(2+3)");
+//
+//
+//
+//	printf("%d\n",(int)a->valeur);
+//	printf("%d\n",(int)a->lv->valeur);
+//	printf("%d\n",(int)a->lv->lh->valeur);
+//
+//
+//	exit(0);
 
 
 
@@ -31,6 +31,8 @@ int main(int argc, char** argv) {
 	AJOUTE_TEST(test_head, depiler);
 	AJOUTE_TEST(test_head, empiler);
 	AJOUTE_TEST(test_head, creerPile);
+
+	AJOUTE_TEST(test_head, countNodes);
 
 	executerTests(test_head, FLAG_EMPTY);
 	detruireTests(test_head);
