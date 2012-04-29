@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
 	AJOUTE_TEST(test_head, pushLPile);
 	AJOUTE_TEST(test_head, createLPile);
 
+	AJOUTE_TEST(test_head, creerArbre);
+
 	AJOUTE_TEST(test_head, countNodes);
 	AJOUTE_TEST(test_head, deepSizeTree);
 	AJOUTE_TEST(test_head, countLeafTree);

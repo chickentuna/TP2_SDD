@@ -20,6 +20,43 @@
 	var_name = &A;									\
 }
 
+result_t* test_creerArbre() {
+	result_t* r = creerResultat();
+	//Cas général
+	{
+		donnee_t* s;
+		arbre_t * a = NULL;
+		int res;
+
+		a = creerArbre("1*(2*(3+4)+5)+6");
+
+		res = (a->valeur = 1) && (a->lv->valeur = 2) && (a->lv->lv->valeur = 3)
+				&& (a->lv->lv->lh->valeur = 4) && (a->lv->lh->valeur = 5)
+				&& (a->lh->valeur = 6);
+
+		assert_t* assert = assertion(r, res, "Cas général");
+		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, s);
+
+		detruireArbre(a);
+	}
+	//Cas arbre à un élément
+	{
+		donnee_t* s;
+		arbre_t * a = NULL;
+		int res;
+
+		a = creerArbre("1");
+		res = (a->valeur = 1 && a->lv == NULL && a->lh == NULL);
+		assert_t* assert = assertion(r, res, "Cas à un seul noeud");
+		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, s);
+		detruireArbre(a);
+	}
+
+	return r;
+}
+
 result_t* test_countNodes() {
 	result_t* r = creerResultat();
 	{

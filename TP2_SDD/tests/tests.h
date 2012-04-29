@@ -10,6 +10,7 @@
  **************************************************************************************/
 #include "../noyau/arbre.h"
 #include "../noyau/list.h"
+#include "../noyau/pile.h"
 #include "../testlib/testlib.h"
 
 /**************************************************************************************
@@ -23,6 +24,8 @@
 
 result_t* test_createLPile();
 result_t* test_pushLPile();
+
+result_t* test_creerArbre();
 
 result_t* test_countNodes();
 result_t* test_deepSizeTree();

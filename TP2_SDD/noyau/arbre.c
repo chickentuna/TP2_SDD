@@ -1,7 +1,10 @@
 ﻿#include "arbre.h"
+#include "pile.h"
 
+//TODO: dérécursifier. + gestion d'erreurs.
 arbre_t * creerArbre(char * str) {
 	arbre_t *nouv = NULL;
+	arbre_t * racine = NULL;
 	arbre_t *suiv;
 	nouv = ALLOC(1,arbre_t);
 	int c = 0;
@@ -9,15 +12,19 @@ arbre_t * creerArbre(char * str) {
 	char op;
 	char *buf;
 
-	while (str[c] != '\0') {
-		if (str[c] == '(' || str[c] == ')') {
-			c++;
-		}
+	while (str[c] == '(' || str[c] == ')') {
+		c++;
+	}
+	if (str[c] == '\0')
+		return NULL;
 
-		val = obtenirValeur(str, &c);
-		nouv->valeur = val;
-		nouv->lv = NULL;
-		nouv->lh = NULL;
+	val = obtenirValeur(str, &c);
+	nouv->valeur = val;
+	nouv->lv = NULL;
+	nouv->lh = NULL;
+	racine = nouv;
+
+	while (str[c] != '\0') {
 
 		op = obtenirOperation(str, &c);
 		if (op == '\0') {
@@ -29,6 +36,7 @@ arbre_t * creerArbre(char * str) {
 		free(buf);
 		if (op == '+') {
 			nouv->lh = suiv;
+			nouv = suiv;
 
 		} else if (op == '*') {
 			nouv->lv = suiv;
@@ -38,8 +46,9 @@ arbre_t * creerArbre(char * str) {
 			printf("String: %s", str);
 			exit(EXIT_FAILURE);
 		}
+
 	}
-	return nouv;
+	return racine;
 }
 
 char * obtenirSuivant(char * str, int *c) {
@@ -62,12 +71,9 @@ char * obtenirSuivant(char * str, int *c) {
 				if (str[i] == ')')
 					n--;
 			}
-			i++;
 		}
 		i++;
-
 	}
-
 	buf = ALLOC(i-*c+1,char);
 	n = 0;
 	for (k = *c; k < i; k++) {
@@ -106,7 +112,6 @@ elem_t obtenirValeur(char * str, int *c) {
 	}
 	buf[n] = '\0';
 	*c = i;
-	printf(">%s\n", buf);
 	res = stringToElement(buf);
 	free(buf);
 	return res;
@@ -149,6 +154,7 @@ int countLeafTree(arbre_t* arbre) {
 	arbre_t* cur_lv;
 	arbre_t* cur_lh;
 
+	//TODO: make this a while.
 	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
 		cur_lv = cur_lh;
 		while (cur_lv != NULL) {
@@ -159,3 +165,54 @@ int countLeafTree(arbre_t* arbre) {
 
 	return total;
 }
+
+//TODO: gestion manque de memoire
+void detruireArbre(arbre_t * arbre) {
+	arbre_t * cour;
+	arbre_t * suiv;
+	pile_t * p;
+
+	cour = arbre; /*Accès à la première racine*/
+	p = creerPile(514); /*Création de la pile*/
+	while (!vide(p) || cour != NULL) {
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			suiv = cour;
+			cour = cour->lh;/*On part sur le lien horizontal*/
+			free(suiv);
+		}
+	}
+
+}
+
+//TODO: gestion manque de memoire
+char * arbreToString(arbre_t * arbre) {
+	char * buf;
+	arbre_t * cour;
+	int n;
+
+	n = countNodes(arbre);
+	buf = ALLOC(n*5+3,char);
+	sprintf(buf, "{ ");
+	pile_t * p;
+
+	cour = arbre; /*Accès à la première racine*/
+	p = creerPile(514); /*Création de la pile*/
+	while (!vide(p) || cour != NULL) {
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+
+		sprintf(buf, "%s%d ", buf, cour->valeur);
+
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			cour = cour->lh;/*On part sur le lien horizontal*/
+		}
+	}
+	sprintf(buf, "%s}", buf);
+	return buf;
+}
+
