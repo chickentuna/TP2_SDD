@@ -8,8 +8,8 @@
 /**************************************************************************************
  *          INCLUSIONS
  **************************************************************************************/
-#include "../noyau/pile.h"
 #include "../noyau/arbre.h"
+#include "../noyau/list.h"
 #include "../testlib/testlib.h"
 
 /**************************************************************************************
@@ -21,14 +21,17 @@
  * est cohérent.
  */
 
-result_t* test_creerPile();
-result_t* test_empiler();
-result_t* test_depiler();
-result_t* test_vide();
-result_t* test_pleine();
+result_t* test_createLPile();
+result_t* test_pushLPile();
 
 result_t* test_countNodes();
 result_t* test_deepSizeTree();
 result_t* test_countLeafTree();
+
+result_t* test_createLList();
+result_t* test_destroyLList();
+result_t* test_getPrevLList();
+result_t* test_removeLList();
+result_t* test_removeNextLList();
 
 #endif /* TESTS_H_ */

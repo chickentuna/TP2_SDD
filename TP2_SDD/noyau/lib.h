@@ -14,7 +14,7 @@
  **************************************************************************************/
 
 /**
- * Type booleén.
+ * Type booleen.
  */
 typedef unsigned char boolean_t;
 
@@ -32,7 +32,9 @@ typedef unsigned char boolean_t;
  * @sortie
  * 	Un pointeur vers une mémoire de taille adéquate.
  */
+#ifndef ALLOC
 #define ALLOC(N,T) (T*) malloc(N*sizeof(T))
+#endif
 
 char* str_join(char *cs, ...);
 
