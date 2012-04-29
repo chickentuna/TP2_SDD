@@ -42,7 +42,6 @@ arbre_t * creerArbre(char * str) {
 	return nouv;
 }
 
-
 char * obtenirSuivant(char * str, int *c) {
 	int i = *c;
 	int n = 0, k;
@@ -114,14 +113,33 @@ elem_t obtenirValeur(char * str, int *c) {
 }
 
 int countNodes(arbre_t* arbre) {
-	int c = 1;
+	int c = 0;
 	arbre_t* cur;
-	for (cur = arbre->lv ; cur != NULL ; cur = cur->lh) {
-		c += countNodes(cur);
+
+	if (arbre != NULL) {
+		for (cur = arbre; cur != NULL; cur = cur->lh) {
+			c += countNodes(cur->lv) + 1;
+		}
 	}
+
 	return c;
 }
 
 int deepSizeTree(arbre_t* arbre) {
-	return 1;
+	int size = 0;
+	int total = 0;
+	arbre_t* cur_lv;
+	arbre_t* cur_lh;
+
+	for (cur_lh = arbre; cur_lh != NULL; cur_lh = cur_lh->lh) {
+		size = 1;
+		for (cur_lv = cur_lh; cur_lv != NULL; cur_lv = cur_lv->lv) {
+			size++;
+		}
+		if (size > total) {
+			total = size;
+		}
+	}
+
+	return total;
 }

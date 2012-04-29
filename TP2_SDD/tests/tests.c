@@ -259,6 +259,12 @@ result_t* test_countNodes() {
 		assert_t* a = assertion(r, size == 4, "Cas général");
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds", size));
 	}
+	{
+		int size = countNodes(NULL);
+
+		assert_t* a = assertion(r, size == 0, "Cas arbre vide");
+		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds", size));
+	}
 	return r;
 }
 
@@ -271,6 +277,11 @@ result_t* test_deepSizeTree() {
 		int deep = deepSizeTree(head);
 
 		assert_t* a = assertion(r, deep == 3, "Cas général");
+		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
+	}
+	{
+		int deep = deepSizeTree(NULL);
+		assert_t* a = assertion(r, deep == 0, "Cas arbre vide");
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
 	}
 	return r;
