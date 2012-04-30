@@ -22,7 +22,7 @@ typedef struct bloc_pile {
  **************************************************************************************/
 
 /**
- * Fonction initPile :
+ * Fonction creerPile :
  * @description
  * 	Initialise une pile en mémoire et renvoie son adresse.
  * @param
