@@ -18,6 +18,10 @@ arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
 	cour = arbre; /*Accès à la première racine*/
 	p = creerPile(514); /*Création de la pile*/
 	while (res == NULL && (!vide(p) || *cour != NULL)) {
+
+		if (pleine(p))
+			erreur("Pile pleine.");
+
 		empiler((elem_t) *cour, p); /*Empiler noeud courant*/
 
 		if ((*cour)->valeur == e) {
@@ -168,7 +172,6 @@ int compterFeuilles(arbre_t* arbre) {
 	return total;
 }
 
-//TODO: gestion manque de memoire
 void detruireArbre(arbre_t * arbre) {
 	arbre_t * cour;
 	arbre_t * suiv;
@@ -177,6 +180,10 @@ void detruireArbre(arbre_t * arbre) {
 	cour = arbre; /*Accès à la première racine*/
 	p = creerPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
+
+		if (pleine(p))
+			erreur("Pile pleine.");
+
 		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
 		cour = cour->lv;/*Descendre sur le lien vertical*/
@@ -207,10 +214,8 @@ char* arbreToString(arbre_t * arbre) {
 
 	while (!vide(p) || cour != NULL) {
 
-		if (pleine(p)) {
-			printf("Pile pleine.");
-			exit(EXIT_FAILURE);
-		}
+		if (pleine(p))
+			erreur("Pile pleine.");
 
 		/* Empiler noeud courant. */
 		empiler((elem_t) cour, p);

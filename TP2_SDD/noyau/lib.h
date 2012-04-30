@@ -4,10 +4,10 @@
 /**************************************************************************************
  *          INCLUSIONS
  **************************************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdarg.h"
+#include "string.h"
 
 /**************************************************************************************
  *          CONSTANTES & MACROS
@@ -35,6 +35,10 @@ typedef unsigned char boolean_t;
 #ifndef ALLOC
 #define ALLOC(N,T) (T*) malloc(N*sizeof(T))
 #endif
+
+#define erreur(mess)		\
+	fprintf(stderr, mess);	\
+	exit(EXIT_FAILURE);
 
 char* str_join(char *cs, ...);
 
