@@ -9,7 +9,6 @@
  *          INCLUSIONS
  **************************************************************************************/
 #include "../noyau/arbre.h"
-#include "../noyau/list.h"
 #include "../noyau/pile.h"
 #include "../testlib/testlib.h"
 

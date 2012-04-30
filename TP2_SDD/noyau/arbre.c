@@ -1,26 +1,6 @@
 ﻿#include "arbre.h"
 #include "pile.h"
 
-#define BEGIN_DFS(arbre) {									\
-	if (arbre != NULL) {									\
-															\
-		lpile_t* _pile = createLPile(arbre);				\
-															\
-		while (!empty(_pile)) {								\
-			arbre_t* _node;									\
-			pop_from(_pile, _node);							\
-			while (_node != NULL) {							\
-				if (_node->lh != NULL) {					\
-					push_into(_pile, _node->lh);			\
-				}											\
-
-#define END_DFS()											\
-				_node = _node->lv;							\
-			}												\
-		}													\
-	}														\
-}
-
 void arbreSupprimer(arbre_t ** arbre) {
 	detruireArbre((*arbre)->lv);
 	*arbre = NULL;
@@ -174,12 +154,6 @@ elem_t obtenirValeur(char * str, int *c) {
 int compterNoeuds(arbre_t* arbre) {
 	int total = 0;
 
-	BEGIN_DFS(arbre)
-
-					total++;
-
-					END_DFS()
-
 	return total;
 }
 
@@ -190,13 +164,6 @@ int mesurerProfondeur(arbre_t* arbre) {
 int compterFeuilles(arbre_t* arbre) {
 	int total = 0;
 
-	BEGIN_DFS(arbre)
-
-					if (_node->lv == NULL) {
-						total++;
-					}
-
-					END_DFS()
 
 	return total;
 }
@@ -223,31 +190,49 @@ void detruireArbre(arbre_t * arbre) {
 
 }
 
-//TODO: gestion manque de memoire
-char * arbreToString(arbre_t * arbre) {
-	char * buf;
-	arbre_t * cour;
-	int n;
+char* arbreToString(arbre_t * arbre) {
+	char* old_buf = NULL;
+	char* buf = ALLOC(3, char);
+	buf = "[";
+	char* el = NULL;
+	arbre_t * cour = NULL;
 
-	n = compterNoeuds(arbre);
-	buf = ALLOC(n*5+3,char);
-	sprintf(buf, "{ ");
 	pile_t * p;
 
-	cour = arbre; /*Accès à la première racine*/
-	p = creerPile(514); /*Création de la pile*/
+	/* Accès à la première racine. */
+	cour = arbre;
+
+	/* Création de la pile. */
+	p = creerPile(514);
+
 	while (!vide(p) || cour != NULL) {
-		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
-		sprintf(buf, "%s%d ", buf, cour->valeur);
+		if (pleine(p)) {
+			printf("Pile pleine.");
+			exit(EXIT_FAILURE);
+		}
 
-		cour = cour->lv;/*Descendre sur le lien vertical*/
+		/* Empiler noeud courant. */
+		empiler((elem_t) cour, p);
+
+		old_buf = buf; /* On sauvegarde l'adresse de l'ancien buffer. */
+		el = elementToString(cour->valeur); /* On parse la valeur de l'élément courant. */
+		buf = str_join("", buf, " ", el, NULL); /* On la fusionne avec le buffer. */
+
+		/* On supprime l'adresse sauvée et la variable
+		 * temporaire de stockage de la valeur de l'élément. */
+		free(old_buf);
+		free(el);
+
+		/* Descendre sur le lien vertical. */
+		cour = cour->lv;
+
 		while (!vide(p) && cour == NULL) {
 			cour = (arbre_t*) depiler(p);/*On dépile*/
 			cour = cour->lh;/*On part sur le lien horizontal*/
 		}
 	}
-	sprintf(buf, "%s}", buf);
+	buf = str_join("", buf, " ]", NULL);
 	return buf;
 }
 
