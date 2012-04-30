@@ -19,6 +19,10 @@ typedef struct bloc_arbre {
 /**************************************************************************************
  *          PROTOTYPES
  **************************************************************************************/
+
+void arbreSupprimer(elem_t e, arbre_t ** arbre);
+arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre);
+
 arbre_t * creerArbre(char * str);
 elem_t obtenirValeur(char * str, int *c);
 char obtenirOperation(char * str, int *c);

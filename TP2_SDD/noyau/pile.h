@@ -78,13 +78,13 @@ int vide(pile_t * pile);
 int pleine(pile_t * pile);
 
 /**
- * Fonction libererPile :
+ * Fonction detruirePile :
  * @description
  *  Libère la mémoire utilisée par une pile.
  * @param
  *  pile - pile à libérer.
  */
-void libererPile(pile_t * pile);
+void detruirePile(pile_t * pile);
 
 /**
  * Fonction ToString():

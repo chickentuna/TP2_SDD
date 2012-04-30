@@ -12,7 +12,7 @@ result_t* test_creerPile() {
 
 		ajouterDonnee(
 				assertion(r, pile->tete == -1, "Création d'une pile vide"), s);
-		libererPile(pile);
+		detruirePile(pile);
 	}
 	return r;
 }
@@ -44,7 +44,7 @@ result_t* test_empiler() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas de la pile pleine
@@ -70,7 +70,7 @@ result_t* test_empiler() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	return r;
@@ -110,7 +110,7 @@ result_t* test_depiler() {
 		ajouterDonnee(assert, s);
 		ajouterDonnee(assert, l);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas de la pile vide
@@ -130,7 +130,7 @@ result_t* test_depiler() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	return r;
@@ -156,7 +156,7 @@ result_t* test_vide() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas de la pile non vide
@@ -178,7 +178,7 @@ result_t* test_vide() {
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
-		libererPile(pile);
+		detruirePile(pile);
 	}
 	return r;
 }
@@ -207,7 +207,7 @@ result_t* test_pleine() {
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas pile non pleine
@@ -230,7 +230,7 @@ result_t* test_pleine() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 	return r;
 }
