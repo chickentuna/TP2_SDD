@@ -21,9 +21,13 @@
 	}														\
 }
 
-void arbreSupprimer(elem_t e, arbre_t ** arbre) {
+void arbreSupprimer(arbre_t ** arbre) {
 	detruireArbre((*arbre)->lv);
 	*arbre = NULL;
+}
+
+void arbreSupprimerValeur(elem_t e, arbre_t ** arbre) {
+	arbreSupprimer(arbreRecherche(e,arbre));
 }
 
 arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
