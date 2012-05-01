@@ -187,7 +187,7 @@ int compterNoeuds(arbre_t* arbre) {
 	return total;
 }
 
-int mesurerProfondeur(arbre_t* arbre) {
+int mesurerHauteur(arbre_t* arbre) {
 	arbre_t * cour;
 	pile_t * p;
 	int profondeur=0;

@@ -26,9 +26,9 @@ result_t* test_pushLPile();
 
 result_t* test_creerArbre();
 
-result_t* test_countNodes();
-result_t* test_deepSizeTree();
-result_t* test_countLeafTree();
+result_t* test_compterNoeuds();
+result_t* test_mesurerHauteur();
+result_t* test_compterFeuilles();
 
 result_t* test_createLList();
 result_t* test_destroyLList();

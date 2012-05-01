@@ -46,7 +46,7 @@ char * arbreToString(arbre_t * arbre);
 void detruireArbre(arbre_t * arbre);
 
 int compterNoeuds(arbre_t* arbre);
-int mesurerProfondeur(arbre_t* arbre);
+int mesurerHauteur(arbre_t* arbre);
 int compterFeuilles(arbre_t* arbre);
 
 #endif
