@@ -165,12 +165,53 @@ elem_t obtenirValeur(char * str, int *c) {
 
 int compterNoeuds(arbre_t* arbre) {
 	int total = 0;
+	arbre_t * cour;
+	pile_t * p;
+
+	cour = arbre; /*Accès à la première racine*/
+	p = creerPile(514); /*Création de la pile*/
+	while (!vide(p) || cour != NULL) {
+		if (pleine(p))
+			erreur("Pile pleine.");
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+
+		total++;
+
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			cour = cour->lh;/*On part sur le lien horizontal*/
+		}
+	}
 
 	return total;
 }
 
 int mesurerProfondeur(arbre_t* arbre) {
-	return 0;
+	arbre_t * cour;
+	pile_t * p;
+	int profondeur=0;
+	int res=0;
+
+		cour = arbre; /*Accès à la première racine*/
+		p = creerPile(514); /*Création de la pile*/
+		while (!vide(p) || cour != NULL) {
+			if (pleine(p))
+				erreur("Pile pleine.");
+			empiler((elem_t) cour, p); /*Empiler noeud courant*/
+
+			profondeur++;
+			if (res<profondeur)
+				res++;
+
+			cour = cour->lv;/*Descendre sur le lien vertical*/
+			while (!vide(p) && cour == NULL) {
+				cour = (arbre_t*) depiler(p);/*On dépile*/
+				profondeur--;
+				cour = cour->lh;/*On part sur le lien horizontal*/
+			}
+		}
+	return res-1;
 }
 
 int compterFeuilles(arbre_t* arbre) {
@@ -185,7 +226,7 @@ int compterFeuilles(arbre_t* arbre) {
 			erreur("Pile pleine.");
 		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
-		if (cour->lv==NULL)
+		if (cour->lv == NULL)
 			total++;
 
 		cour = cour->lv;/*Descendre sur le lien vertical*/
