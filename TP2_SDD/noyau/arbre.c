@@ -2,41 +2,49 @@
 #include "pile.h"
 
 void arbreSupprimer(arbre_t ** arbre) {
-	detruireArbre((*arbre)->lv);
+	/*Suppresion avec élagage*/
+	detruireArbre((*arbre));
 	*arbre = NULL;
 }
 
 void arbreSupprimerValeur(elem_t e, arbre_t ** arbre) {
-	arbreSupprimer(arbreRecherche(e,arbre));
+	arbre_t ** prec = arbreRecherche(e,arbre);
+	if (prec != NULL)
+		arbreSupprimer(prec);
 }
 
 arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
-	arbre_t ** res = NULL;
-	arbre_t ** cour;
+	arbre_t ** prec;
+	arbre_t * cour;
 	pile_t * p;
+	int fin = FAUX;
 
-	cour = arbre; /*Accès à la première racine*/
+	prec = arbre; /*Accès à la première racine*/
+	cour = *arbre;
 	p = creerPile(514); /*Création de la pile*/
-	while (res == NULL && (!vide(p) || *cour != NULL)) {
-
-		if (pleine(p))
-			erreur("Pile pleine.");
-
-		empiler((elem_t) *cour, p); /*Empiler noeud courant*/
-
-		if ((*cour)->valeur == e) {
-			res = cour;
+	while (!fin) {
+		while (cour != NULL && !fin) {
+			if (cour->valeur == e) {
+						fin = VRAI;
+			} else {
+				if (pleine(p))
+							erreur("Pile pleine.");
+				empiler((elem_t) cour, p); /*Empiler noeud courant*/
+				prec = &(cour->lv);
+				cour = cour->lv;
+			}
 		}
-
-		cour = &((*cour)->lv);/*Descendre sur le lien vertical*/
-		while (res == NULL && !vide(p) && cour == NULL) {
-			*cour = (arbre_t*) depiler(p);/*On dépile*/
-			cour = (&(*cour)->lh);/*On part sur le lien horizontal*/
+		if (!vide(p) && !fin) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			prec = &(cour->lh);
+			cour = cour->lh;/*On part sur le lien horizontal*/
+		} else {
+			fin = VRAI;
 		}
 	}
 	detruirePile(p);
 
-	return res;
+	return prec;
 }
 
 //TODO: dérécursifier. + gestion d'erreurs.
