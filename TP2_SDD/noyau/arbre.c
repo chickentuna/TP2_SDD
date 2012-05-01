@@ -8,7 +8,7 @@ void arbreSupprimer(arbre_t ** arbre) {
 }
 
 void arbreSupprimerValeur(elem_t e, arbre_t ** arbre) {
-	arbre_t ** prec = arbreRecherche(e,arbre);
+	arbre_t ** prec = arbreRecherche(e, arbre);
 	if (prec != NULL)
 		arbreSupprimer(prec);
 }
@@ -25,10 +25,10 @@ arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
 	while (!fin) {
 		while (cour != NULL && !fin) {
 			if (cour->valeur == e) {
-						fin = VRAI;
+				fin = VRAI;
 			} else {
 				if (pleine(p))
-							erreur("Pile pleine.");
+					erreur("Pile pleine.");
 				empiler((elem_t) cour, p); /*Empiler noeud courant*/
 				prec = &(cour->lv);
 				cour = cour->lv;
@@ -175,7 +175,25 @@ int mesurerProfondeur(arbre_t* arbre) {
 
 int compterFeuilles(arbre_t* arbre) {
 	int total = 0;
+	arbre_t * cour;
+	pile_t * p;
 
+	cour = arbre; /*Accès à la première racine*/
+	p = creerPile(514); /*Création de la pile*/
+	while (!vide(p) || cour != NULL) {
+		if (pleine(p))
+			erreur("Pile pleine.");
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+
+		if (cour->lv==NULL)
+			total++;
+
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			cour = cour->lh;/*On part sur le lien horizontal*/
+		}
+	}
 
 	return total;
 }
@@ -211,7 +229,6 @@ char* arbreToString(arbre_t * arbre) {
 	buf = "[";
 	char* el = NULL;
 	arbre_t * cour = NULL;
-
 	pile_t * p;
 
 	/* Accès à la première racine. */
