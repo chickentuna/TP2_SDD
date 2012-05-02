@@ -12,7 +12,7 @@ result_t* test_initPile() {
 
 		ajouterDonnee(
 				assertion(r, pile->tete == -1, "Création d'une pile vide"), s);
-		libererPile(pile);
+		detruirePile(pile);
 	}
 	return r;
 }
@@ -26,11 +26,12 @@ result_t* test_empiler() {
 		donnee_t* e;
 		donnee_t* s;
 		int i;
+		int *a=1;
 
 		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 1; i < 4; i++) {
-			empiler((elemp_t)i, pile);
+			empiler(a, pile);
 		}
 
 		assert_t* assert = assertion(
@@ -44,7 +45,7 @@ result_t* test_empiler() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas de la pile pleine
@@ -55,7 +56,7 @@ result_t* test_empiler() {
 		int i;
 
 		for (i = 1; i < 4; i++) {
-			empiler(i, pile);
+			empiler((elem_t)i, pile);
 		}creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		empiler(4, pile);
@@ -70,7 +71,7 @@ result_t* test_empiler() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	return r;
@@ -90,7 +91,7 @@ result_t* test_depiler() {
 		char* buf;
 
 		for (i = 1; i < 4; i++) {
-			empiler(i, pile);
+			empiler((elem_t)i, pile);
 		}creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 0; i < 3; i++)
@@ -110,7 +111,7 @@ result_t* test_depiler() {
 		ajouterDonnee(assert, s);
 		ajouterDonnee(assert, l);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas de la pile vide
@@ -130,7 +131,7 @@ result_t* test_depiler() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	return r;
@@ -156,7 +157,7 @@ result_t* test_vide() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas de la pile non vide
@@ -167,7 +168,7 @@ result_t* test_vide() {
 		int res, i;
 
 		for (i = 1; i < 4; i++)
-			empiler(i, pile);
+			empiler((elem_t)i, pile);
 
 		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
@@ -178,7 +179,7 @@ result_t* test_vide() {
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
-		libererPile(pile);
+		detruirePile(pile);
 	}
 	return r;
 }
@@ -194,7 +195,7 @@ result_t* test_pleine() {
 		int res, i;
 
 		for (i = 1; i < 4; i++)
-			empiler(i, pile);
+			empiler((elem_t)i, pile);
 
 		char* buf = pileToString(pile);
 		creerTamponDonnee(e, TYPE_ENTREE, buf);
@@ -207,7 +208,7 @@ result_t* test_pleine() {
 
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
-		libererPile(pile);
+		detruirePile(pile);
 	}
 
 	//Cas pile non pleine
@@ -218,7 +219,7 @@ result_t* test_pleine() {
 		int res, i;
 
 		for (i = 1; i < 3; i++)
-			empiler(i, pile);
+			empiler((elem_t)i, pile);
 
 		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
@@ -230,7 +231,7 @@ result_t* test_pleine() {
 		ajouterDonnee(assert, e);
 		ajouterDonnee(assert, s);
 
-		libererPile(pile);
+		detruirePile(pile);
 	}
 	return r;
 }

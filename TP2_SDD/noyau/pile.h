@@ -12,7 +12,7 @@
  **************************************************************************************/
 
 typedef struct bloc_pile {
-	elemp_t* tab;
+	elem_t* tab;
 	int taille;
 	int tete;
 } pile_t;
@@ -42,7 +42,7 @@ pile_t * initPile(int taille);
  * 	element - élément à empiler.
  * 	pile - pile sur laquelle on empile.
  */
-void empiler(elemp_t element, pile_t * pile);
+void empiler(elem_t element, pile_t * pile);
 
 /**
  * Fonction depiler :
@@ -53,7 +53,7 @@ void empiler(elemp_t element, pile_t * pile);
  * @sortie
  *  L'élément dépilé.
  */
-elemp_t depiler(pile_t * pile);
+elem_t depiler(pile_t * pile);
 
 /**
  * Fonction vide :

@@ -4,17 +4,16 @@
 /**************************************************************************************
  *          INCLUSIONS
  **************************************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdarg.h"
+#include "string.h"
 
 /**************************************************************************************
  *          CONSTANTES & MACROS
  **************************************************************************************/
 
-typedef void* elemp_t;
-typedef void* elema_t;
+typedef void* elem_t;
 
 /* Constantes booléennes classiques. */
 #define VRAI 1
@@ -32,6 +31,10 @@ typedef void* elema_t;
  */
 #undef ALLOC
 #define ALLOC(N,T) (T*) malloc(N*sizeof(T))
+
+#define erreur(mess)		\
+	fprintf(stderr, mess);	\
+	exit(EXIT_FAILURE);
 
 char* str_join(char *cs, ...);
 

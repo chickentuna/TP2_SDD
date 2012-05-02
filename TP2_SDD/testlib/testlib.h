@@ -20,32 +20,32 @@
 #undef ALLOC
 #define ALLOC(_n,_t) (_t*) malloc(_n*sizeof(_t))
 
-#define CHECK_PARAMETER(_par, _mess) { \
-	if ((_par) == NULL) { \
-		fprintf(stderr, _mess); \
-		fprintf(stderr, "\n"); \
-		exit(EXIT_FAILURE); \
-	} \
+#define CHECK_PARAMETER(_par, _mess) {									\
+	if ((_par) == NULL) {												\
+		fprintf(stderr, _mess);											\
+		fprintf(stderr, "\n");											\
+		exit(EXIT_FAILURE);												\
+	}																	\
 }
 
-#define FOR_EACH(list, size, el, actions) {							\
-	int compteur;													\
-	if (list != NULL && size > 0) {									\
-		for (compteur = 0 ; compteur < size ; compteur++) {			\
-			typeof(list[0]) el = list[compteur];					\
-			actions													\
-		}															\
-	}																\
+#define FOR_EACH(list, size, el, actions) {								\
+	int compteur;														\
+	if (list != NULL && size > 0) {										\
+		for (compteur = 0 ; compteur < size ; compteur++) {				\
+			typeof(list[0]) el = list[compteur];						\
+			actions														\
+		}																\
+	}																	\
 }
 
-#define creerTamponDonnee(donnee, type, texte) {					\
-	char* tampon = texte;											\
-	donnee = creerDonnee(type, tampon);								\
-	free(tampon);													\
+#define creerTamponDonnee(donnee, type, texte) {						\
+	char* tampon = texte;												\
+	donnee = creerDonnee(type, tampon);									\
+	free(tampon);														\
 }
 
-#define creerBoolDonnee(donnee, type, condition) {					\
-	creerTamponDonnee(donnee, type, (condition ? "VRAI" : "FAUX"));	\
+#define creerBoolDonnee(donnee, type, condition) {						\
+	creerTamponDonnee(donnee, type, (condition ? "VRAI" : "FAUX"));		\
 }
 
 #define TYPE_ENTREE						"Entrée"
