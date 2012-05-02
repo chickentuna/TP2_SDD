@@ -1,11 +1,4 @@
-﻿/*
- * element.c
- *
- *  Created on: 28 avr. 2012
- *      Author: Loup
- */
-
-#include "element.h"
+﻿#include "element.h"
 
 char* elementToString(elem_t el) {
 	char* buffer = NULL;
