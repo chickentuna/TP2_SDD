@@ -23,8 +23,8 @@ typedef struct bloc_arbre {
  **************************************************************************************/
 
 void arbreSupprimer(arbre_t ** arbre);
-void arbreSupprimerValeur(elem_t e, arbre_t ** arbre);
-arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre);
+void arbreSupprimerValeur(char e, arbre_t ** arbre);
+arbre_t ** arbreRecherche(char e, arbre_t ** arbre);
 
 /**
  * Fonction initArbre :

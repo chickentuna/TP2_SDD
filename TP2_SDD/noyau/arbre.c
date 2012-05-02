@@ -3,17 +3,17 @@
 
 void arbreSupprimer(arbre_t ** arbre) {
 	/*Suppresion avec élagage*/
-	detruireArbre((*arbre));
+	libererArbre((*arbre));
 	*arbre = NULL;
 }
 
-void arbreSupprimerValeur(elem_t e, arbre_t ** arbre) {
+void arbreSupprimerValeur(char e, arbre_t ** arbre) {
 	arbre_t ** prec = arbreRecherche(e, arbre);
 	if (prec != NULL)
 		arbreSupprimer(prec);
 }
 
-arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
+arbre_t ** arbreRecherche(char e, arbre_t ** arbre) {
 	arbre_t ** prec;
 	arbre_t * cour;
 	pile_t * p;
@@ -21,7 +21,7 @@ arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
 
 	prec = arbre; /*Accès à la première racine*/
 	cour = *arbre;
-	p = creerPile(514); /*Création de la pile*/
+	p = initPile(514); /*Création de la pile*/
 	while (!fin) {
 		while (cour != NULL && !fin) {
 			if (cour->valeur == e) {
@@ -42,19 +42,19 @@ arbre_t ** arbreRecherche(elem_t e, arbre_t ** arbre) {
 			fin = VRAI;
 		}
 	}
-	detruirePile(p);
+	libererPile(p);
 
 	return prec;
 }
 
 //TODO: dérécursifier. + gestion d'erreurs.
-arbre_t * creerArbre(char * str) {
+arbre_t * initArbre(char * str) {
 	arbre_t *nouv = NULL;
 	arbre_t * racine = NULL;
 	arbre_t *suiv;
 	nouv = ALLOC(1, arbre_t);
 	int c = 0;
-	elema_t val;
+	char val;
 	char op;
 	char *buf;
 
@@ -78,7 +78,7 @@ arbre_t * creerArbre(char * str) {
 		}
 
 		buf = obtenirSuivant(str, &c);
-		suiv = creerArbre(buf);
+		suiv = initArbre(buf);
 		free(buf);
 		if (op == '+') {
 			nouv->lh = suiv;
@@ -141,11 +141,10 @@ char obtenirOperation(char * str, int *c) {
 		return '\0';
 }
 
-elema_t obtenirValeur(char * str, int *c) {
+char obtenirValeur(char * str, int *c) {
 	int i = *c;
 	int n, k;
 	char *buf;
-	elema_t res;
 
 	while (str[i] != ')' && str[i] != '+' && str[i] != '*' && str[i] != '\0') {
 		i++;
@@ -158,9 +157,9 @@ elema_t obtenirValeur(char * str, int *c) {
 	}
 	buf[n] = '\0';
 	*c = i;
-	res = stringToTreeElement(buf);
+
 	free(buf);
-	return res;
+	return buf[0];
 }
 
 int compterNoeuds(arbre_t* arbre) {
@@ -169,7 +168,7 @@ int compterNoeuds(arbre_t* arbre) {
 	pile_t * p;
 
 	cour = arbre; /*Accès à la première racine*/
-	p = creerPile(514); /*Création de la pile*/
+	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
 		if (pleine(p))
 			erreur("Pile pleine.");
@@ -183,35 +182,36 @@ int compterNoeuds(arbre_t* arbre) {
 			cour = cour->lh;/*On part sur le lien horizontal*/
 		}
 	}
-
+	libererPile(p);
 	return total;
 }
 
 int mesurerHauteur(arbre_t* arbre) {
 	arbre_t * cour;
 	pile_t * p;
-	int profondeur=0;
-	int res=0;
+	int profondeur = 0;
+	int res = 0;
 
-		cour = arbre; /*Accès à la première racine*/
-		p = creerPile(514); /*Création de la pile*/
-		while (!vide(p) || cour != NULL) {
-			if (pleine(p))
-				erreur("Pile pleine.");
-			empiler((elem_t) cour, p); /*Empiler noeud courant*/
+	cour = arbre; /*Accès à la première racine*/
+	p = initPile(514); /*Création de la pile*/
+	while (!vide(p) || cour != NULL) {
+		if (pleine(p))
+			erreur("Pile pleine.");
+		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
-			profondeur++;
-			if (res<profondeur)
-				res++;
+		profondeur++;
+		if (res < profondeur)
+			res++;
 
-			cour = cour->lv;/*Descendre sur le lien vertical*/
-			while (!vide(p) && cour == NULL) {
-				cour = (arbre_t*) depiler(p);/*On dépile*/
-				profondeur--;
-				cour = cour->lh;/*On part sur le lien horizontal*/
-			}
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			profondeur--;
+			cour = cour->lh;/*On part sur le lien horizontal*/
 		}
-	return res-1;
+	}
+	libererPile(p);
+	return res - 1;
 }
 
 int compterFeuilles(arbre_t* arbre) {
@@ -220,7 +220,7 @@ int compterFeuilles(arbre_t* arbre) {
 	pile_t * p;
 
 	cour = arbre; /*Accès à la première racine*/
-	p = creerPile(514); /*Création de la pile*/
+	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
 		if (pleine(p))
 			erreur("Pile pleine.");
@@ -239,7 +239,7 @@ int compterFeuilles(arbre_t* arbre) {
 	return total;
 }
 
-void detruireArbre(arbre_t * arbre) {
+void libererArbre(arbre_t * arbre) {
 	arbre_t * cour;
 	arbre_t * suiv;
 	pile_t * p;
@@ -247,7 +247,6 @@ void detruireArbre(arbre_t * arbre) {
 	cour = arbre; /*Accès à la première racine*/
 	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-
 
 		if (pleine(p))
 			erreur("Pile pleine.");
@@ -277,8 +276,7 @@ char* arbreToString(arbre_t * arbre) {
 	cour = arbre;
 
 	/* Création de la pile. */
-	p = creerPile(514);
-
+	p = initPile(514);
 
 	while (!vide(p) || cour != NULL) {
 		if (pleine(p))
@@ -287,7 +285,10 @@ char* arbreToString(arbre_t * arbre) {
 		empiler(cour, p);
 
 		old_buf = buf; /* On sauvegarde l'adresse de l'ancien buffer. */
-		el = elementToString(cour->valeur); /* On parse la valeur de l'élément courant. */
+		el = ALLOC(2,char);
+		el[0] = cour->valeur; //TODO:str_join kinda makes this bit difficult.
+		el[1] = '\0';
+
 		buf = str_join("", buf, " ", el, NULL); /* On la fusionne avec le buffer. */
 
 		/* On supprime l'adresse sauvée et la variable

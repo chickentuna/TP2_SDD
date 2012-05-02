@@ -23,6 +23,8 @@
 
 
 result_t* test_initArbre();
+result_t* test_empiler();
+result_t* test_depiler();
 
 result_t* test_compterNoeuds();
 result_t* test_mesurerHauteur();

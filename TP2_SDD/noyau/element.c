@@ -7,25 +7,16 @@
 
 #include "element.h"
 
-char* stackElementToString(elemp_t el) {
+char* elementToString(elem_t el) {
 	char* buffer = NULL;
 	buffer = ALLOC(25, char);
-	sprintf(buffer, "%d", el);
+	sprintf(buffer, "%d", (int)el);
 	return buffer;
 }
 
-char* treeElementToString(elema_t el) {
-	char* buffer = NULL;
-	buffer = ALLOC(25, char);
-	sprintf(buffer, "%d", el);
-	return buffer;
+
+elem_t stringToElement(char* value) {
+	return (elem_t)atoi(value);
 }
 
-elemp_t stringToStackElement(char* value) {
-	return atoi(value);
-}
-
-elema_t stringToTreeElement(char* value) {
-	return atoi(value);
-}
 

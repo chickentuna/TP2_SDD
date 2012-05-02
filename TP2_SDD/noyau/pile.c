@@ -31,7 +31,7 @@ int pleine(pile_t* pile) {
 	return pile->tete == pile->taille - 1;
 }
 
-void detruirePile(pile_t* pile) {
+void libererPile(pile_t* pile) {
 	free(pile->tab);
 	free(pile);
 }

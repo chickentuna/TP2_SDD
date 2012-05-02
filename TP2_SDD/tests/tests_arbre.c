@@ -64,6 +64,8 @@ result_t* test_initArbre() {
 				&& (a->lv->lv->lh->valeur == 4) && (a->lv->lh->valeur == 5)
 				&& (a->lh->valeur == 6);
 
+		printf("%d",(int)a);
+
 		assert_t* assert = assertion(r, res, "Cas général");
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);
@@ -76,18 +78,18 @@ result_t* test_initArbre() {
 		arbre_t * a = NULL;
 		int res;
 
-		a = creerArbre("1");
+		a = initArbre("1");
 		res = (a->valeur = 1 && a->lv == NULL && a->lh == NULL);
 		assert_t* assert = assertion(r, res, "Cas à un seul noeud");
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);
-		detruireArbre(a);
+		libererArbre(a);
 	}
 
 	return r;
 }
 
-result_t* test_countNodes() {
+result_t* test_compterNoeuds() {
 	result_t* r = creerResultat();
 	{
 		arbre_t* droit;
@@ -141,7 +143,7 @@ result_t* test_deepSizeTree() {
 		arbre_t* head;
 		DEBUG_creerArbreDroit_static(head);
 
-		int deep = mesurerProfondeur(head);
+		int deep = mesurerHauteur(head);
 
 		assert_t* a = assertion(r, deep == 3, "Cas général à droite");
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
@@ -150,7 +152,7 @@ result_t* test_deepSizeTree() {
 		arbre_t* head;
 		DEBUG_creerArbreGauche_static(head);
 
-		int deep = mesurerProfondeur(head);
+		int deep = mesurerHauteur(head);
 
 		assert_t* a = assertion(r, deep == 3, "Cas général à gauche");
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
@@ -159,14 +161,14 @@ result_t* test_deepSizeTree() {
 		arbre_t* head;
 		DEBUG_creerArbreComplexe_static(head);
 
-		int nb = mesurerProfondeur(head);
+		int nb = mesurerHauteur(head);
 
 		assert_t* a = assertion(r, nb == 4, "Cas complexe");
 		ajouterDonnee(a,
 				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
-		int deep = mesurerProfondeur(NULL);
+		int deep = mesurerHauteur(NULL);
 		assert_t* a = assertion(r, deep == 0, "Cas arbre vide");
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
 	}
@@ -206,7 +208,7 @@ result_t* test_countLeafTree() {
 				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
-		int nb = mesurerProfondeur(NULL);
+		int nb = mesurerHauteur(NULL);
 		assert_t* a = assertion(r, nb == 0, "Cas arbre vide");
 		ajouterDonnee(a,
 				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
