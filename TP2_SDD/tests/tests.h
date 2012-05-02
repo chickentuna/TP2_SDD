@@ -31,9 +31,11 @@ result_t* test_pleine();
 /*Tests arbre*/
 result_t* test_initArbre();
 result_t* test_arbreRecherche();
+result_t* test_arbreSupprimer();
+result_t* test_arbreSupprimerValeur();
 result_t* test_compterNoeuds();
 result_t* test_mesurerHauteur();
 result_t* test_compterFeuilles();
-result_t* test_arbreSupprimerValeur();
+
 
 #endif /* TESTS_H_ */

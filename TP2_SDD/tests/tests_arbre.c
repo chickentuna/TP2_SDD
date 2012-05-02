@@ -149,7 +149,30 @@ result_t* test_arbreSupprimerValeur() {
 
 		libererArbre(a);
 	}
+	return r;
+}
+result_t* test_arbreSupprimer() {
+	result_t* r = creerResultat();
+	//Cas général
+	{
+		arbre_t * a = NULL;
+		assert_t* assert;
+		donnee_t* e;
 
+		a = initArbre("a*(b*(c+d)+e)+f");
+
+		creerTamponDonnee(e,TYPE_ENTREE, arbreToString(a));
+
+		arbreSupprimer(&(a->lv));
+
+		assert = assertion(r, a->lv == NULL,
+				"Cas général (suppresion de b)");
+
+		ajouterDonnee(assert, e);
+		ajouterDonnee(assert, creerDonnee(TYPE_RETOUR, arbreToString(a)));
+
+		libererArbre(a);
+	}
 	return r;
 }
 

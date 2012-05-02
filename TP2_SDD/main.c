@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
 	test_t* test_head = NULL;
 
 	/*Tests arbre*/
+	AJOUTE_TEST(test_head, arbreSupprimer);
 	AJOUTE_TEST(test_head, arbreSupprimerValeur);
 	AJOUTE_TEST(test_head, arbreRecherche);
 	AJOUTE_TEST(test_head, mesurerHauteur);
