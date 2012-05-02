@@ -145,6 +145,7 @@ char obtenirValeur(char * str, int *c) {
 	int i = *c;
 	int n, k;
 	char *buf;
+	char res;
 
 	while (str[i] != ')' && str[i] != '+' && str[i] != '*' && str[i] != '\0') {
 		i++;
@@ -158,8 +159,9 @@ char obtenirValeur(char * str, int *c) {
 	buf[n] = '\0';
 	*c = i;
 
+	res = buf[0];
 	free(buf);
-	return buf[0];
+	return res;
 }
 
 int compterNoeuds(arbre_t* arbre) {
@@ -279,8 +281,10 @@ char* arbreToString(arbre_t * arbre) {
 	p = initPile(514);
 
 	while (!vide(p) || cour != NULL) {
-		if (pleine(p))
-			erreur("Pile pleine.");
+		if (pleine(p)) {
+			//erreur("Pile pleine");
+		}
+
 		/* Empiler noeud courant. */
 		empiler(cour, p);
 

@@ -60,11 +60,9 @@ result_t* test_initArbre() {
 
 		a = initArbre("1*(2*(3+4)+5)+6");
 
-		res = (a->valeur == 1) && (a->lv->valeur == 2) && (a->lv->lv->valeur == 3)
-				&& (a->lv->lv->lh->valeur == 4) && (a->lv->lh->valeur == 5)
-				&& (a->lh->valeur == 6);
-
-		printf("%d",(int)a);
+		res = (a->valeur == '1') && (a->lv->valeur == '2') && (a->lv->lv->valeur == '3')
+				&& (a->lv->lv->lh->valeur == '4') && (a->lv->lh->valeur == '5')
+				&& (a->lh->valeur == '6');
 
 		assert_t* assert = assertion(r, res, "Cas général");
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
@@ -79,7 +77,7 @@ result_t* test_initArbre() {
 		int res;
 
 		a = initArbre("1");
-		res = (a->valeur = 1 && a->lv == NULL && a->lh == NULL);
+		res = (a->valeur = '1' && a->lv == NULL && a->lh == NULL);
 		assert_t* assert = assertion(r, res, "Cas à un seul noeud");
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);
