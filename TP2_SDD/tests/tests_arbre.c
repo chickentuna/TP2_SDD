@@ -77,7 +77,7 @@ result_t* test_initArbre() {
 		int res;
 
 		a = initArbre("1");
-		res = (a->valeur = '1' && a->lv == NULL && a->lh == NULL);
+		res = (a->valeur == '1' && a->lv == NULL && a->lh == NULL);
 		assert_t* assert = assertion(r, res, "Cas à un seul noeud");
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);

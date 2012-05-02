@@ -250,8 +250,9 @@ void libererArbre(arbre_t * arbre) {
 	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
 
-		if (pleine(p))
+		if (pleine(p)) {
 			erreur("Pile pleine.");
+		}
 
 		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
@@ -282,15 +283,16 @@ char* arbreToString(arbre_t * arbre) {
 
 	while (!vide(p) || cour != NULL) {
 		if (pleine(p)) {
-			//erreur("Pile pleine");
+			erreur("Pile pleine");
 		}
 
 		/* Empiler noeud courant. */
 		empiler(cour, p);
 
 		old_buf = buf; /* On sauvegarde l'adresse de l'ancien buffer. */
+
 		el = ALLOC(2,char);
-		el[0] = cour->valeur; //TODO:str_join kinda makes this bit difficult.
+		el[0] = cour->valeur; //TODO:this is odd.
 		el[1] = '\0';
 
 		buf = str_join("", buf, " ", el, NULL); /* On la fusionne avec le buffer. */
