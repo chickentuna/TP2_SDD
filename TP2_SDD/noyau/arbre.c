@@ -8,7 +8,7 @@ arbre_t * creerArbre(char * str) {
 	arbre_t *suiv;
 	nouv = ALLOC(1,arbre_t);
 	int c = 0;
-	elem_t val;
+	elema_t val;
 	char op;
 	char *buf;
 
@@ -95,11 +95,11 @@ char obtenirOperation(char * str, int *c) {
 		return '\0';
 }
 
-elem_t obtenirValeur(char * str, int *c) {
+elema_t obtenirValeur(char * str, int *c) {
 	int i = *c;
 	int n, k;
 	char *buf;
-	elem_t res;
+	elema_t res;
 
 	while (str[i] != ')' && str[i] != '+' && str[i] != '*' && str[i] != '\0') {
 		i++;
@@ -112,7 +112,7 @@ elem_t obtenirValeur(char * str, int *c) {
 	}
 	buf[n] = '\0';
 	*c = i;
-	res = stringToElement(buf);
+	res = stringToTreeElement(buf);
 	free(buf);
 	return res;
 }
@@ -137,47 +137,16 @@ elem_t obtenirValeur(char * str, int *c) {
 	}														\
 }
 
-int compterNoeuds(arbre_t* arbre) {
-	int total = 0;
-
-	BEGIN_DFS(arbre)
-
-	total++;
-
-	END_DFS()
-
-	return total;
-}
-
-
-int mesurerProfondeur(arbre_t* arbre) {
-	return 0;
-}
-
-int compterFeuilles(arbre_t* arbre) {
-	int total = 0;
-
-	BEGIN_DFS(arbre)
-
-	if (_node->lv == NULL) {
-		total++;
-	}
-
-	END_DFS()
-
-	return total;
-}
-
 //TODO: gestion manque de memoire
-void detruireArbre(arbre_t * arbre) {
+void libererArbre(arbre_t * arbre) {
 	arbre_t * cour;
 	arbre_t * suiv;
 	pile_t * p;
 
 	cour = arbre; /*Accès à la première racine*/
-	p = creerPile(514); /*Création de la pile*/
+	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+		empiler((elemp_t) cour, p); /*Empiler noeud courant*/
 
 		cour = cour->lv;/*Descendre sur le lien vertical*/
 		while (!vide(p) && cour == NULL) {
@@ -196,17 +165,18 @@ char * arbreToString(arbre_t * arbre) {
 	arbre_t * cour;
 	int n;
 
-	n = compterNoeuds(arbre);
+	//n = compterNoeuds(arbre);
+	n = 25;
 	buf = ALLOC(n*5+3,char);
 	sprintf(buf, "{ ");
 	pile_t * p;
 
 	cour = arbre; /*Accès à la première racine*/
-	p = creerPile(514); /*Création de la pile*/
+	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-		empiler((elem_t) cour, p); /*Empiler noeud courant*/
+		empiler((elemp_t) cour, p); /*Empiler noeud courant*/
 
-		sprintf(buf, "%s%d ", buf, cour->valeur);
+		sprintf(buf, "%s%d ", buf, (int)cour->valeur);
 
 		cour = cour->lv;/*Descendre sur le lien vertical*/
 		while (!vide(p) && cour == NULL) {

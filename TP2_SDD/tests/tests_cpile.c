@@ -1,12 +1,12 @@
 #include "tests.h"
 
-result_t* test_creerPile() {
+result_t* test_initPile() {
 	result_t* r = creerResultat();
 
 	// Création de la pile.
 	{
 		donnee_t* s;
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 
 		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
 
@@ -22,7 +22,7 @@ result_t* test_empiler() {
 
 	//Cas général
 	{
-		pile_t* pile = creerPile(10);
+		pile_t* pile = initPile(10);
 		donnee_t* e;
 		donnee_t* s;
 		int i;
@@ -30,7 +30,7 @@ result_t* test_empiler() {
 		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 1; i < 4; i++) {
-			empiler(i, pile);
+			empiler((elemp_t)i, pile);
 		}
 
 		assert_t* assert = assertion(
@@ -49,7 +49,7 @@ result_t* test_empiler() {
 
 	//Cas de la pile pleine
 	{
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int i;
@@ -81,7 +81,7 @@ result_t* test_depiler() {
 
 	//Cas général
 	{
-		pile_t* pile = creerPile(10);
+		pile_t* pile = initPile(10);
 		donnee_t* e;
 		donnee_t* s;
 		donnee_t* l;
@@ -115,7 +115,7 @@ result_t* test_depiler() {
 
 	//Cas de la pile vide
 	{
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
 
@@ -141,7 +141,7 @@ result_t* test_vide() {
 
 	//Cas pile vide
 	{
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res;
@@ -161,7 +161,7 @@ result_t* test_vide() {
 
 	//Cas de la pile non vide
 	{
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res, i;
@@ -188,7 +188,7 @@ result_t* test_pleine() {
 
 	//Cas de la pile pleine
 	{
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res, i;
@@ -212,7 +212,7 @@ result_t* test_pleine() {
 
 	//Cas pile non pleine
 	{
-		pile_t* pile = creerPile(3);
+		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
 		int res, i;

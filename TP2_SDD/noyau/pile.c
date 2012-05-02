@@ -1,26 +1,26 @@
 ﻿#include "pile.h"
 
-pile_t* creerPile(int taille) {
+pile_t* initPile(int taille) {
 	pile_t* nouv;
 
 	nouv = ALLOC(1, pile_t);
-	nouv->tab = ALLOC(taille, elem_t);
+	nouv->tab = ALLOC(taille, elemp_t);
 	nouv->tete = -1;
 	nouv->taille = taille;
 	return nouv;
 }
 
-void empiler(elem_t element, pile_t* pile) {
+void empiler(elemp_t element, pile_t* pile) {
 	if (!pleine(pile)) {
 		pile->tab[++pile->tete] = element;
 	}
 }
 
-elem_t depiler(pile_t* pile) {
+elemp_t depiler(pile_t* pile) {
 	if (!vide(pile)) {
 		return pile->tab[pile->tete--];
 	}
-	return (elem_t) 0;
+	return (elemp_t) 0;
 }
 
 int vide(pile_t* pile) {
@@ -51,7 +51,7 @@ char* pileToString(pile_t* pile) {
 
 			old_buf = buf;
 
-			char* el = elementToString(pile->tab[i]);
+			char* el = stackElementToString(pile->tab[i]);
 			buf = str_join("", buf, " ", el, NULL);
 
 			free(old_buf);

@@ -13,10 +13,8 @@
  *          CONSTANTES & MACROS
  **************************************************************************************/
 
-/**
- * Type booleen.
- */
-typedef unsigned char boolean_t;
+typedef void* elemp_t;
+typedef void* elema_t;
 
 /* Constantes booléennes classiques. */
 #define VRAI 1
@@ -32,11 +30,9 @@ typedef unsigned char boolean_t;
  * @sortie
  * 	Un pointeur vers une mémoire de taille adéquate.
  */
-#ifndef ALLOC
+#undef ALLOC
 #define ALLOC(N,T) (T*) malloc(N*sizeof(T))
-#endif
 
 char* str_join(char *cs, ...);
 
 #endif
-
