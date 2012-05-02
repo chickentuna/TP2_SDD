@@ -90,16 +90,20 @@ result_t* test_initArbre() {
 result_t* test_compterNoeuds() {
 	result_t* r = creerResultat();
 	{
-		arbre_t* droit;
-		DEBUG_creerArbreDroit_static(droit);
-
+		arbre_t* arbre;
+		donnee_t* e;
+		DEBUG_creerArbreDroit_static(arbre);
 		int size;
 
-		size = compterNoeuds(droit);
+		creerTamponDonnee(e, TYPE_ENTREE, arbreToString(arbre));
+
+		size = compterNoeuds(arbre);
 		assert_t* a = assertion(r, size == 4, "Cas général (droit)");
+		ajouterDonnee(a,e);
 		ajouterDonnee(a,
 				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (droit)",
 						size));
+
 	}
 	{
 		arbre_t* gauche;
@@ -109,6 +113,8 @@ result_t* test_compterNoeuds() {
 
 		size = compterNoeuds(gauche);
 		assert_t* a = assertion(r, size == 4, "Cas général (gauche)");
+
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(gauche)));
 		ajouterDonnee(a,
 				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (gauche)",
 						size));
@@ -121,16 +127,15 @@ result_t* test_compterNoeuds() {
 
 		size = compterNoeuds(gauche);
 		assert_t* a = assertion(r, size == 13, "Cas complexe");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (gauche)",
-						size));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(gauche)));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds (gauche)",size));
 	}
 	{
 		int size = compterNoeuds(NULL);
 
 		assert_t* a = assertion(r, size == 0, "Cas arbre vide");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds", size));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,"null"));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de noeuds", size));
 	}
 	return r;
 }
@@ -144,6 +149,7 @@ result_t* test_mesurerHauteur() {
 		int deep = mesurerHauteur(head);
 
 		assert_t* a = assertion(r, deep == 3, "Cas général à droite");
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(head)));
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
 	}
 	{
@@ -153,6 +159,7 @@ result_t* test_mesurerHauteur() {
 		int deep = mesurerHauteur(head);
 
 		assert_t* a = assertion(r, deep == 3, "Cas général à gauche");
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(head)));
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
 	}
 	{
@@ -162,12 +169,13 @@ result_t* test_mesurerHauteur() {
 		int nb = mesurerHauteur(head);
 
 		assert_t* a = assertion(r, nb == 4, "Cas complexe");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(head)));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
 		int deep = mesurerHauteur(NULL);
 		assert_t* a = assertion(r, deep == 0, "Cas arbre vide");
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,"null"));
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_DUMP, "Hauteur", deep));
 	}
 	return r;
@@ -182,8 +190,8 @@ result_t* test_compterFeuilles() {
 		int nb = compterFeuilles(head);
 
 		assert_t* a = assertion(r, nb == 2, "Cas général à droite");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(head)));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
 		arbre_t* head;
@@ -192,8 +200,8 @@ result_t* test_compterFeuilles() {
 		int nb = compterFeuilles(head);
 
 		assert_t* a = assertion(r, nb == 2, "Cas général à gauche");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(head)));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
 		arbre_t* head;
@@ -202,14 +210,14 @@ result_t* test_compterFeuilles() {
 		int nb = compterFeuilles(head);
 
 		assert_t* a = assertion(r, nb == 7, "Cas complexe");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,arbreToString(head)));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	{
-		int nb = mesurerHauteur(NULL);
+		int nb = compterFeuilles(NULL);
 		assert_t* a = assertion(r, nb == 0, "Cas arbre vide");
-		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
+		ajouterDonnee(a,creerDonnee(TYPE_ENTREE,"null"));
+		ajouterDonnee(a,creerDonneeWithInt(TYPE_DUMP, "Nombre de feuille", nb));
 	}
 	return r;
 }

@@ -27,8 +27,9 @@ arbre_t ** arbreRecherche(char e, arbre_t ** arbre) {
 			if (cour->valeur == e) {
 				fin = VRAI;
 			} else {
-				if (pleine(p))
+				if (pleine(p)) {
 					erreur("Pile pleine.");
+				}
 				empiler((elem_t) cour, p); /*Empiler noeud courant*/
 				prec = &(cour->lv);
 				cour = cour->lv;
@@ -172,8 +173,9 @@ int compterNoeuds(arbre_t* arbre) {
 	cour = arbre; /*Accès à la première racine*/
 	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-		if (pleine(p))
+		if (pleine(p)) {
 			erreur("Pile pleine.");
+		}
 		empiler(cour, p); /*Empiler noeud courant*/
 
 		total++;
@@ -197,8 +199,9 @@ int mesurerHauteur(arbre_t* arbre) {
 	cour = arbre; /*Accès à la première racine*/
 	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-		if (pleine(p))
+		if (pleine(p)) {
 			erreur("Pile pleine.");
+		}
 		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
 		profondeur++;
@@ -221,11 +224,15 @@ int compterFeuilles(arbre_t* arbre) {
 	arbre_t * cour;
 	pile_t * p;
 
+	if (arbre==NULL)
+		return 0;
+
 	cour = arbre; /*Accès à la première racine*/
 	p = initPile(514); /*Création de la pile*/
 	while (!vide(p) || cour != NULL) {
-		if (pleine(p))
+		if (pleine(p))  {
 			erreur("Pile pleine.");
+		}
 		empiler((elem_t) cour, p); /*Empiler noeud courant*/
 
 		if (cour->lv == NULL)
