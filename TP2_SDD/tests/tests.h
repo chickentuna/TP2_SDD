@@ -34,5 +34,6 @@ result_t* test_arbreRecherche();
 result_t* test_compterNoeuds();
 result_t* test_mesurerHauteur();
 result_t* test_compterFeuilles();
+result_t* test_arbreSupprimerValeur();
 
 #endif /* TESTS_H_ */

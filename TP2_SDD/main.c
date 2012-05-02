@@ -11,11 +11,13 @@ int main(int argc, char** argv) {
 	test_t* test_head = NULL;
 
 	/*Tests arbre*/
+	AJOUTE_TEST(test_head, arbreSupprimerValeur);
 	AJOUTE_TEST(test_head, arbreRecherche);
 	AJOUTE_TEST(test_head, mesurerHauteur);
 	AJOUTE_TEST(test_head, compterFeuilles);
 	AJOUTE_TEST(test_head, compterNoeuds);
 	AJOUTE_TEST(test_head, initArbre);
+
 
 	/*Tests pile*/
 	AJOUTE_TEST(test_head, vide);
