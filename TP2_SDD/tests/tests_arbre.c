@@ -135,7 +135,7 @@ result_t* test_compterNoeuds() {
 	return r;
 }
 
-result_t* test_deepSizeTree() {
+result_t* test_mesurerHauteur() {
 	result_t* r = creerResultat();
 	{
 		arbre_t* head;
@@ -173,7 +173,7 @@ result_t* test_deepSizeTree() {
 	return r;
 }
 
-result_t* test_countLeafTree() {
+result_t* test_compterFeuilles() {
 	result_t* r = creerResultat();
 	{
 		arbre_t* head;

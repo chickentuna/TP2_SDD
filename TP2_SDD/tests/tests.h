@@ -21,11 +21,15 @@
  * est cohérent.
  */
 
-
-result_t* test_initArbre();
+/*Tests pile*/
+result_t* test_initPile();
 result_t* test_empiler();
 result_t* test_depiler();
+result_t* test_vide();
+result_t* test_pleine();
 
+/*Tests arbre*/
+result_t* test_initArbre();
 result_t* test_compterNoeuds();
 result_t* test_mesurerHauteur();
 result_t* test_compterFeuilles();
