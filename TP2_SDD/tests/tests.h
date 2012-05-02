@@ -30,6 +30,7 @@ result_t* test_pleine();
 
 /*Tests arbre*/
 result_t* test_initArbre();
+result_t* test_arbreRecherche();
 result_t* test_compterNoeuds();
 result_t* test_mesurerHauteur();
 result_t* test_compterFeuilles();

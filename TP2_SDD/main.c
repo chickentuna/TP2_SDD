@@ -10,6 +10,13 @@ int main(int argc, char** argv) {
 
 	test_t* test_head = NULL;
 
+	/*Tests arbre*/
+	AJOUTE_TEST(test_head, arbreRecherche);
+	AJOUTE_TEST(test_head, mesurerHauteur);
+	AJOUTE_TEST(test_head, compterFeuilles);
+	AJOUTE_TEST(test_head, compterNoeuds);
+	AJOUTE_TEST(test_head, initArbre);
+
 	/*Tests pile*/
 	AJOUTE_TEST(test_head, vide);
 	AJOUTE_TEST(test_head, pleine);
@@ -17,14 +24,6 @@ int main(int argc, char** argv) {
 	AJOUTE_TEST(test_head, depiler);
 	AJOUTE_TEST(test_head, empiler);
 	AJOUTE_TEST(test_head, initPile);
-
-	/*Tests arbre*/
-	AJOUTE_TEST(test_head, mesurerHauteur);
-	AJOUTE_TEST(test_head, compterFeuilles);
-	AJOUTE_TEST(test_head, compterNoeuds);
-	AJOUTE_TEST(test_head, initArbre);
-
-
 
 	executerTests(test_head, FLAG_EMPTY);
 	detruireTests(test_head);
