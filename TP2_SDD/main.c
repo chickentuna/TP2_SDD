@@ -25,7 +25,10 @@ int main(int argc, char** argv) {
 		a = initArbre(buf);
 
 		printf("Arbre chargé: %s\n",buf);
-		printf("Noeuds de l'arbre : %s\n",arbreToString(a));
+		printf("Noeuds de l'arbre (%d noeuds) : %s\n",compterNoeuds(a),arbreToString(a));
+		printf("Feuilles : %d\n",compterFeuilles(a));
+		printf("Hauteur : %d\n",mesurerHauteur(a));
+
 	} else {
 
 		/*Tests arbre*/

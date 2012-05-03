@@ -51,7 +51,6 @@
 #define TYPE_ENTREE						"Entrée"
 #define TYPE_SORTIE						"Sortie"
 #define TYPE_RETOUR						"Retour"
-#define TYPE_DUMP						"Dump"
 
 #define VRAI							1
 #define FAUX							0
@@ -64,8 +63,6 @@
 
 #define MAX_NBCAR_INT					11
 
-typedef unsigned char flag_t;
-
 #define FLAG_EMPTY						0
 #define FLAG_HIDE_ASSERTS				1
 #define FLAG_HIDE_DATAS					2
@@ -73,6 +70,8 @@ typedef unsigned char flag_t;
 /**************************************************************************************
  *          STRUCTURES & TYPES
  **************************************************************************************/
+
+typedef unsigned char flag_t;
 
 typedef struct donnee_s {
 	char* type;

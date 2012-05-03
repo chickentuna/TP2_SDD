@@ -142,6 +142,7 @@ char obtenirOperation(char * str, int *c) {
 		return '\0';
 }
 
+//TODO: changer tout ce merdier car ce n'est qu'un char qui est lu.
 char obtenirValeur(char * str, int *c) {
 	int i = *c;
 	int n, k;
@@ -195,6 +196,9 @@ int mesurerHauteur(arbre_t* arbre) {
 	pile_t * p;
 	int profondeur = 0;
 	int res = 0;
+
+	if (arbre==NULL)
+		return 0;
 
 	cour = arbre; /*Accès à la première racine*/
 	p = initPile(514); /*Création de la pile*/
@@ -299,7 +303,7 @@ char* arbreToString(arbre_t * arbre) {
 		old_buf = buf; /* On sauvegarde l'adresse de l'ancien buffer. */
 
 		el = ALLOC(2,char);
-		el[0] = cour->valeur; //TODO:this is odd.
+		el[0] = cour->valeur;
 		el[1] = '\0';
 
 		buf = str_join("", buf, " ", el, NULL); /* On la fusionne avec le buffer. */
