@@ -188,8 +188,7 @@ result_t* test_compterNoeuds() {
 		assert_t* a = assertion(r, size == 4, "Cas général (droit)");
 		ajouterDonnee(a, e);
 		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_RETOUR, "Nombre de noeuds",
-						size));
+				creerDonneeWithInt(TYPE_RETOUR, "Nombre de noeuds", size));
 	}
 	{
 		arbre_t* gauche;
@@ -202,8 +201,7 @@ result_t* test_compterNoeuds() {
 
 		ajouterDonnee(a, creerDonnee(TYPE_ENTREE, "a*(b*d+c)"));
 		ajouterDonnee(a,
-				creerDonneeWithInt(TYPE_RETOUR, "Nombre de noeuds",
-						size));
+				creerDonneeWithInt(TYPE_RETOUR, "Nombre de noeuds", size));
 	}
 	{
 		arbre_t* arbre;
@@ -212,7 +210,8 @@ result_t* test_compterNoeuds() {
 
 		size = compterNoeuds(arbre);
 		assert_t* a = assertion(r, size == 13, "Cas complexe");
-		ajouterDonnee(a, creerDonnee(TYPE_ENTREE, "a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))"));
+		ajouterDonnee(a,
+				creerDonnee(TYPE_ENTREE, "a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))"));
 		ajouterDonnee(a,
 				creerDonneeWithInt(TYPE_RETOUR, "Nombre de noeuds", size));
 	}
@@ -300,7 +299,8 @@ result_t* test_compterFeuilles() {
 		int nb = compterFeuilles(head);
 
 		assert_t* a = assertion(r, nb == 7, "Cas complexe");
-		ajouterDonnee(a, creerDonnee(TYPE_ENTREE, "a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))"));
+		ajouterDonnee(a,
+				creerDonnee(TYPE_ENTREE, "a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))"));
 		ajouterDonnee(a,
 				creerDonneeWithInt(TYPE_RETOUR, "Nombre de feuilles", nb));
 	}
