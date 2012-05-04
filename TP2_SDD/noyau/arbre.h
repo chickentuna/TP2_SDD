@@ -92,7 +92,7 @@ arbre_t ** arbreRecherche(char e, arbre_t ** arbre);
  * @param
  *  arbre - l'arbre.
  * @variables locales
- *  total - entier coresspondant au nombre de noeuds trouvé.
+ *  total - entier correspondant au nombre de noeuds trouvé.
  *  cour - pointeur sur le sous arbre courant.
  *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
  * @sortie
@@ -123,7 +123,7 @@ int mesurerHauteur(arbre_t* arbre);
  * @param
  *  arbre - l'arbre.
  * @variables locales
- *  total - entier coresspondant au nombre de feuilles trouvé.
+ *  total - entier correspondant au nombre de feuilles trouvé.
  *  cour - pointeur sur le sous arbre courant.
  *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
  * @sortie
