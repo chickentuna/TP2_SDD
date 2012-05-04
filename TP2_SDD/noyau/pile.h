@@ -5,7 +5,6 @@
  *          INCLUSIONS
  **************************************************************************************/
 #include "lib.h"
-#include "element.h"
 
 /**************************************************************************************
  *          STRUCTURES & TYPES
@@ -87,7 +86,7 @@ int pleine(pile_t * pile);
 void libererPile(pile_t * pile);
 
 /**
- * Fonction ToString():
+ * Fonction pileToString():
  * @description
  *  Convertit une pile en une chaine de caractères.
  *  Utilisée pour les sorties des fonctions de tests.

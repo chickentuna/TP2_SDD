@@ -39,6 +39,7 @@ void libererPile(pile_t* pile) {
 char* pileToString(pile_t* pile) {
 	char* buf = NULL;
 	char* old_buf = NULL;
+	char* el;
 	int i;
 
 	if (vide(pile)) {
@@ -48,10 +49,10 @@ char* pileToString(pile_t* pile) {
 		buf = ALLOC(2, char);
 		strcpy(buf, "[");
 		for (i = 0; i < pile->tete + 1; i++) {
-
 			old_buf = buf;
 
-			char* el = elementToString(pile->tab[i]);
+			el = ALLOC(25,char);
+			sprintf(el,"%d",(int)pile->tab[i]);
 			buf = str_join("", buf, " ", el, NULL);
 
 			free(old_buf);

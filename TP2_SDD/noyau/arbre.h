@@ -5,7 +5,6 @@
  *          INCLUSIONS
  **************************************************************************************/
 #include "lib.h"
-#include "element.h"
 
 /**************************************************************************************
  *          STRUCTURES & TYPES
@@ -86,12 +85,69 @@ void arbreSupprimerValeur(char e, arbre_t ** arbre);
  */
 arbre_t ** arbreRecherche(char e, arbre_t ** arbre);
 
-
+/**
+ * Fonction compterNoeuds :
+ * @description
+ *  Compte le nombre de noeuds dans un arbre.
+ * @param
+ *  arbre - l'arbre.
+ * @variables locales
+ *  total - entier coresspondant au nombre de noeuds trouvé.
+ *  cour - pointeur sur le sous arbre courant.
+ *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
+ * @sortie
+ *	Le nombre de noeuds rencontré pendant le parcours de l'arbre.
+ */
 int compterNoeuds(arbre_t* arbre);
+/**
+ * Fonction mesurerHauteur :
+ * @description
+ *  Récupère la hauteur d'un arbre.
+ * @param
+ *  arbre - l'arbre.
+ * @variables locales
+ *  profondeur - niveau courant dans l'arbre.
+ *  res - profondeur maximum atteinte.
+ *  cour - pointeur sur le sous arbre courant.
+ *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
+ * @sortie
+ *  Le nombre maximal de noeuds rencontré en descendant sur l'arbre, c'est à dire sa hauteur.
+ *  Retourne 0 si l'arbre est vide.
+ */
 int mesurerHauteur(arbre_t* arbre);
+
+/**
+ * Fonction compterFeuilles :
+ * @description
+ *  Compte le nombre de feuilles dans un arbre.
+ * @param
+ *  arbre - l'arbre.
+ * @variables locales
+ *  total - entier coresspondant au nombre de feuilles trouvé.
+ *  cour - pointeur sur le sous arbre courant.
+ *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
+ * @sortie
+ *	Le nombre de feuilles rencontré pendant le parcours de l'arbre.
+ */
 int compterFeuilles(arbre_t* arbre);
 
+/**
+ * Fonction arbreToString():
+ * @description
+ *  Convertit un arbre en une chaine de caractères.
+ *  Utilisée pour les sorties des fonctions de tests.
+ * @param
+ *  arbre - arbre à convertir.
+ */
 char * arbreToString(arbre_t * arbre);
+
+/**
+ * Fonction libererPile :
+ * @description
+ *  Libère la mémoire utilisée par un arbre.
+ * @param
+ *  arbre - arbre à libérer.
+ */
 void libererArbre(arbre_t * arbre);
 
 #endif
