@@ -1,7 +1,8 @@
 ﻿#include "arbre.h"
 #include "pile.h"
 
-//TODO: dérécursifier. + gestion d'erreurs.
+//TODO: dérécursifier. + gestion d'erreurs + ajout des commentaires.
+//TODO: COMMENT ON DERECURSIFIE CETTE MERDE? -_-'
 arbre_t * initArbre(char * str) {
 	arbre_t *nouv = NULL;
 	arbre_t * racine = NULL;
