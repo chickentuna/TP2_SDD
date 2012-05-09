@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt] {article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{verbatim}
+\usepackage{graphicx}
+
+\title{Rapport TD de Structure}
+\author{Julien Poulton & Peluso Loup}
+\date{17/03/2012}
+
+\begin{document}
+
+\part{Présentation du projet}
+
+  L'objectif de ce TP est de coder un système capable de gérer <pile + arbre>
+  
+Les structures de données seront codées en C et le code <possibilités>
+
+\section{Description du projet}
+\subsection{Schéma de la structure de donnée}
+	<Comment fonctionne l'arbre et la pile>	
+Dans le code, <les structures sont representées par> pointeur sur le premier élément. <pile+mag> sont représentée par des \verb#struct#s.
+	
+\begin{verbatim}
+<Voir exemple DDD>
+\end{verbatim}
+
+\subsection{Organisation du code source}
+
+Toutes les fonctions utilisées sont déclarées dans le fichier \verb#lib.h#.
+Les macros d'insertion et de recherche sont déclarés dans \verb#macros.h#.
+Les fonctions relatives à la liste des produits sont codés dans \verb#produit.c# :
+
+\begin{itemize}
+	\item \verb#initProduit()#
+	\item \verb#supprimerProduit()#
+	\item \verb#insererProduit()#
+	\item \verb#libererProduit()#
+	\item \verb#chercherProduit()#
+	\item \verb#fusionnerProduits()#
+\end{itemize}
+\newline
+Les fonctions relatives a la liste des magasins sont codés dans \verb#magasin.c# :
+\begin{itemize}
+    \item \verb#initMagasin()#
+    \item \verb#supprimerMagasin()#
+    \item \verb#chercherMagasin()#
+    \item \verb#libererMagasin()#
+    \item \verb#libererListeMagasin()#
+    \item \verb#insererMagasin()#
+    \item \verb#obtenirMagasin()#
+    \item \verb#insererIdMagasin()#
+    \item \verb#compterProduit()#
+\end{itemize}
+
+Les fonctions génériques et celles qui gèrent la structure dans l'ensemble sont codés dans \verb#lib.c# :
+\begin{itemize}
+    \item \verb#lireListe()#
+    \item \verb#ecrireListe()#
+    \item \verb#lireId()#
+    \item \verb#dichoListeId()#
+    \item \verb#decalDroiteId()#
+    \item \verb#libererListe()#
+    \item \verb#libererListeId()#
+\end{itemize}
+	
+Ces fichiers contiennent aussi des fonctions toString() pour convertir les structures de données associées en chaine de caractères, utilisées uniquement par le système de test.
+
+Les fonctions qui gèrent l'éxécution et la sortie des test sont déclarés dans \verb#testlib.h# et codé dans \verb#testlib.c#.
+Chaque fonction de \verb#lib.h# est testé individuellement dans \verb#tests.c# selon le principe des tests unitaires (c'est a dire que chaque fonction est testée dans un contexte qui lui est propre). La liste des tests à éxécuter est déclarée dans \verb#tests.h#.
+De plus, il y a un test fonctionnel qui teste l'enchainement des fonctions principales et affiche les résultats à l'écran.
+Pour lancer les tests, ajoutez '\verb#test#' à la ligne d'éxécution du programme.
+Le résultat d'une éxécution de ces tests est donné en annexe, ainsi que son rapport valgrind.
+
+Le fichier \verb#main.c# contient la fonction principale \verb#main()# qui charge un fichier dont le nom est donné en ligne de commande et affiche la structure de données générée. Une éxécution du programme avec le fichier \verb#exemple.txt# vu par ddd est donné en annexe.
+
+
+
+\section{Méthodologie}
+\subsection{Langage de programmation}
+Il était imposé d'utiliser le langage C dans le cadre de ce TD.
+\subsection{Gestionnaire de version}
+Afin de pouvoir travailler à deux simplement nous avons décidé d'utiliser le gestionnaire de version GIT ainsi que GitHub.com pour centraliser le code.
+
+\end{document}
