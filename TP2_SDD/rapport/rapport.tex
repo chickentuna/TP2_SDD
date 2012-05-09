@@ -14,69 +14,64 @@
 
 \part{Présentation du projet}
 
-  L'objectif de ce TP est de coder un système capable de gérer <pile + arbre>
-  
-Les structures de données seront codées en C et le code <possibilités>
+  L'objectif de ce TP est de coder un système capable de gérer et de parcourir des arbores par lien vertical et lien horizontal. La structure de donnée sera codée en C et le code contiendra les fonctions de recherche et suppression (avec élagage), ainsi que la possibilité de charger un arbre en mémoire à partir de son écriture algébrique dans un fichier. Le code pourra aussi afficher à l'écran le nombre de n?uds, le nombre de feuilles, et la hauteur d'un arbre.
 
 \section{Description du projet}
 \subsection{Schéma de la structure de donnée}
-	<Comment fonctionne l'arbre et la pile>	
-Dans le code, <les structures sont representées par> pointeur sur le premier élément. <pile+mag> sont représentée par des \verb#struct#s.
-	
+	Chaque n?ud d'un arbre est représenté par un mot de 3 bloc. Ce bloc contient: \begin{itemize}
+\item La valeur du n?ud (ici, un seul caractère).
+\item Le lien horizontal du n?ud, c'est à dire un pointeur vers son frère suivant (s'il en a un).
+\item Le lien vertical du n?ud, c'est à dire un pointeur vers son premier fils (s'il en a).
+\end{itemize}
+Le premier n?ud est appelé \emph{racine} de l'arbre.\\
+\par Le parcours d'un arbre se fait grâce à une pile. Une pile est représentée par un tableau d'éléments avec indice de tête.\\
+\par Dans le code, les piles et les arborescences utilisées sont des \verb#struct#s. De plus, les éléments de la pile sont déclaré avec un typedef pour plus de généricité et son, par défaut, des \verb#void*#. Quant au valeur des noeuds d'un arbre, ce sont des \verb#char#.
 \begin{verbatim}
-<Voir exemple DDD>
+cf. DDD_arbre_exemple.png
 \end{verbatim}
 
 \subsection{Organisation du code source}
 
-Toutes les fonctions utilisées sont déclarées dans le fichier \verb#lib.h#.
-Les macros d'insertion et de recherche sont déclarés dans \verb#macros.h#.
-Les fonctions relatives à la liste des produits sont codés dans \verb#produit.c# :
+Le code source est divisé en 3 parties : Le noyau (toutes les fonctions répondant au besoins du TP),\\ la section 'tests' pour les fonctions de test et leur système de gestion,\\ et le programme principal, \verb#main.c#, contenant la fonction \verb#main()# qui charge un fichier dont le nom est donné en ligne de commande et affiche la structure de donnée générée. Le fichier doit contenir la notation algébrique d'un arbre avec un seul caractère par élément.
+Une exécution du programme avec le fichier \verb#exemple.arbre# vu par ddd est donné en annexe, ainsi que son rapport valgrind.
 
+dans \verb#main.c#, qui permet soit d'exécuter les tests de toutes les fonctions du noyau, soit de charger un fichier à traiter (le nom du fichier doit être donné en commande).\\
+
+\par Les macros et types généraux sont déclarés dans \verb#lib.h#.\\
+Les fonctions relatives à la pile sont codés dans \verb#pile.c#.\\
 \begin{itemize}
-	\item \verb#initProduit()#
-	\item \verb#supprimerProduit()#
-	\item \verb#insererProduit()#
-	\item \verb#libererProduit()#
-	\item \verb#chercherProduit()#
-	\item \verb#fusionnerProduits()#
+	\item \verb#initPile()#
+	\item \verb#empiler()#
+	\item \verb#depiler()#
+	\item \verb#vide()#
+	\item \verb#pleine()#
+	\item \verb#libererPile()#
 \end{itemize}
 \newline
-Les fonctions relatives a la liste des magasins sont codés dans \verb#magasin.c# :
+Les fonctions relatives aux arbres sont codés dans \verb#arbre.c#.\\
 \begin{itemize}
-    \item \verb#initMagasin()#
-    \item \verb#supprimerMagasin()#
-    \item \verb#chercherMagasin()#
-    \item \verb#libererMagasin()#
-    \item \verb#libererListeMagasin()#
-    \item \verb#insererMagasin()#
-    \item \verb#obtenirMagasin()#
-    \item \verb#insererIdMagasin()#
-    \item \verb#compterProduit()#
+    \item \verb#initArbre()#
+    \item \verb#arbreSupprimer()#
+    \item \verb#arbreSupprimerValeur()#
+    \item \verb#arbreRecherche()#
+    \item \verb#compterNoeuds()#
+    \item \verb#mesurerHauteur()#
+    \item \verb#compterFeuilles()#
+    \item \verb#libererArbre()#
 \end{itemize}
-
-Les fonctions génériques et celles qui gèrent la structure dans l'ensemble sont codés dans \verb#lib.c# :
+La fonction \verb#initArbre()# utilise 3 sous programmes : 
 \begin{itemize}
-    \item \verb#lireListe()#
-    \item \verb#ecrireListe()#
-    \item \verb#lireId()#
-    \item \verb#dichoListeId()#
-    \item \verb#decalDroiteId()#
-    \item \verb#libererListe()#
-    \item \verb#libererListeId()#
+    \item \verb#obtenirValeur()#
+    \item \verb#obtenirOperation()#
+    \item \verb#obtenirSuivant()#
 \end{itemize}
-	
-Ces fichiers contiennent aussi des fonctions toString() pour convertir les structures de données associées en chaine de caractères, utilisées uniquement par le système de test.
-
-Les fonctions qui gèrent l'éxécution et la sortie des test sont déclarés dans \verb#testlib.h# et codé dans \verb#testlib.c#.
-Chaque fonction de \verb#lib.h# est testé individuellement dans \verb#tests.c# selon le principe des tests unitaires (c'est a dire que chaque fonction est testée dans un contexte qui lui est propre). La liste des tests à éxécuter est déclarée dans \verb#tests.h#.
-De plus, il y a un test fonctionnel qui teste l'enchainement des fonctions principales et affiche les résultats à l'écran.
-Pour lancer les tests, ajoutez '\verb#test#' à la ligne d'éxécution du programme.
-Le résultat d'une éxécution de ces tests est donné en annexe, ainsi que son rapport valgrind.
-
-Le fichier \verb#main.c# contient la fonction principale \verb#main()# qui charge un fichier dont le nom est donné en ligne de commande et affiche la structure de données générée. Une éxécution du programme avec le fichier \verb#exemple.txt# vu par ddd est donné en annexe.
-
-
+\newline
+La documentation des ces fonctions se trouvent respectivement dans \verb#pile.h# et \verb#arbre.h#. Ces fichiers contiennent aussi des fonctions \verb#toString()# pour convertir les structures de données associées en chaine de caractères, utilisées uniquement par le système de test.
+\\
+Les fonctions qui gèrent l'exécution et l'affichage des sorties des test sont déclarés dans \verb#testlib.h# et codé dans \verb#testlib.c#.
+Chaque fonction du noyau est testé individuellement dans \verb#tests.c# selon le principe des tests unitaires (c'est a dire que chaque fonction est testée dans un contexte qui lui est propre). La liste des tests à exécuter est déclarée dans \verb#tests.h#.
+Pour lancer les tests, ajoutez '\verb#test#' à la ligne d'exécution du programme.
+Le résultat d'une exécution de ces tests est donné en annexe, ainsi que son rapport valgrind.\\
 
 \section{Méthodologie}
 \subsection{Langage de programmation}
