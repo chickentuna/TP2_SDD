@@ -275,7 +275,7 @@ void libererArbre(arbre_t * arbre) {
 			free(suiv);
 		}
 	}
-
+	libererPile(p);
 }
 
 char* arbreToString(arbre_t * arbre) {

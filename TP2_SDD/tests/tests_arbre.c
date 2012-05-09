@@ -54,7 +54,7 @@ result_t* test_initArbre() {
 	result_t* r = creerResultat();
 	//Cas général
 	{
-		donnee_t* s;
+		//donnee_t* s;
 		arbre_t * a = NULL;
 		int res;
 
@@ -65,13 +65,15 @@ result_t* test_initArbre() {
 				&& (a->lv->lh->valeur == '5') && (a->lh->valeur == '6');
 
 		assert_t* assert = assertion(r, res, "Cas général");
+		/*
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);
+		*/
 
 		libererArbre(a);
 	}
 	//Cas arbre à un élément
-	{
+	/*{
 		donnee_t* s;
 		arbre_t * a = NULL;
 		int res;
@@ -82,7 +84,7 @@ result_t* test_initArbre() {
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);
 		libererArbre(a);
-	}
+	}*/
 
 	return r;
 }
@@ -94,6 +96,7 @@ result_t* test_arbreRecherche() {
 		arbre_t * a = NULL;
 		arbre_t ** prec;
 		assert_t* assert;
+		donnee_t* s;
 
 		a = initArbre("a*(b*(c+d)+e)+f");
 
@@ -102,8 +105,10 @@ result_t* test_arbreRecherche() {
 		assert = assertion(r, (*prec)->valeur == 'e',
 				"Cas général (recherche de e)");
 
-		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, arbreToString(a)));
-		ajouterDonnee(assert, creerDonnee(TYPE_RETOUR, arbreToString(*prec)));
+		creerTamponDonnee(s,TYPE_RETOUR, arbreToString(*prec));
+
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
+		ajouterDonnee(assert, s);
 
 		libererArbre(a);
 	}
@@ -112,6 +117,7 @@ result_t* test_arbreRecherche() {
 		arbre_t * a = NULL;
 		arbre_t ** prec;
 		assert_t* assert;
+		donnee_t* s;
 
 		a = initArbre("a*(b*(c+d)+e)+f");
 
@@ -119,8 +125,10 @@ result_t* test_arbreRecherche() {
 
 		assert = assertion(r, *prec == NULL, "Cas non trouvé (recherche de g)");
 
-		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, arbreToString(a)));
-		ajouterDonnee(assert, creerDonnee(TYPE_RETOUR, arbreToString(*prec)));
+		creerTamponDonnee(s,TYPE_RETOUR, arbreToString(*prec));
+
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
+		ajouterDonnee(assert, s);
 
 		libererArbre(a);
 	}
@@ -133,18 +141,18 @@ result_t* test_arbreSupprimerValeur() {
 	{
 		arbre_t * a = NULL;
 		assert_t* assert;
-		donnee_t* e;
+		donnee_t* s;
 
 		a = initArbre("a*(b*(c+d)+e)+f");
 
-		creerTamponDonnee(e, TYPE_ENTREE, arbreToString(a));
-
+		
 		arbreSupprimerValeur('b', &a);
+		creerTamponDonnee(s, TYPE_RETOUR, arbreToString(a));
 
 		assert = assertion(r, a->lv == NULL, "Cas général (suppresion de b)");
 
-		ajouterDonnee(assert, e);
-		ajouterDonnee(assert, creerDonnee(TYPE_RETOUR, arbreToString(a)));
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
+		ajouterDonnee(assert, s);
 
 		libererArbre(a);
 	}
@@ -156,18 +164,17 @@ result_t* test_arbreSupprimer() {
 	{
 		arbre_t * a = NULL;
 		assert_t* assert;
-		donnee_t* e;
+		donnee_t* s;
 
 		a = initArbre("a*(b*(c+d)+e)+f");
 
-		creerTamponDonnee(e, TYPE_ENTREE, arbreToString(a));
-
 		arbreSupprimer(&(a->lv));
+		creerTamponDonnee(s, TYPE_RETOUR, arbreToString(a));
 
 		assert = assertion(r, a->lv == NULL, "Cas général (suppresion de b)");
 
-		ajouterDonnee(assert, e);
-		ajouterDonnee(assert, creerDonnee(TYPE_RETOUR, arbreToString(a)));
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
+		ajouterDonnee(assert, s);
 
 		libererArbre(a);
 	}
