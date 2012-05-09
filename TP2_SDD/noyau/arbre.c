@@ -109,9 +109,17 @@ char obtenirValeur(char * str, int *c) {
 	return res;
 }
 
+//TODO: ajouter dans les tests le cas où le sous arbre supprimé à un lh
 void arbreSupprimer(arbre_t ** arbre) {
+	arbre_t* prec;
+
 	/*Suppresion avec élagage*/
-	libererArbre((*arbre));
+	if (*arbre != NULL) {
+		prec = *arbre;			
+		*arbre = (*arbre)->lh;
+		prec->lh = NULL;
+	}
+	libererArbre(prec);
 	*arbre = NULL;
 }
 

@@ -50,21 +50,23 @@ char * obtenirSuivant(char * str, int *c);
 /**
  * Fonction arbreSupprimer :
  * @description
- * 	Supprime le sous arbre donné en paramètre.
+ *  Supprime le sous arbre donné en paramètre.
  * @param
- * 	arbre - pointeur de pointeur sur l'arbre.
+ *  arbre - pointeur de pointeur sur l'arbre.
+ * @variables locales
+ *  prec - pointeur sur le sous arbre à libérer une fois supprimé.
  */
 void arbreSupprimer(arbre_t ** arbre);
 
 /**
  * Fonction arbreSupprimerValeur :
  * @description
- * 	Supprime le premier sous arbre trouvé dont la valeur de la racine est celle donné en paramètre.
+ *  Supprime le premier sous arbre trouvé dont la valeur de la racine est celle donné en paramètre.
  * @param
- * 	e - valeur à trouver dans l'arbre.
- * 	arbre - pointeur de pointeur sur l'arbre.
+ *  e - valeur à trouver dans l'arbre.
+ *  arbre - pointeur de pointeur sur l'arbre.
  * @variables locales
- * 	prec - pointeur de pointeur sur l'arbre trouvé.
+ *  prec - pointeur de pointeur sur l'arbre trouvé.
  */
 void arbreSupprimerValeur(char e, arbre_t ** arbre);
 
@@ -73,8 +75,8 @@ void arbreSupprimerValeur(char e, arbre_t ** arbre);
  * @description
  *  Recherche dans un arbre un sous arbre dont la valeur de la racine est celle donné en paramètre.
  * @param
- * 	e - valeur à trouver dans l'arbre.
- * 	arbre - pointeur de pointeur sur l'arbre.
+ *  e - valeur à trouver dans l'arbre.
+ *  arbre - pointeur de pointeur sur l'arbre.
  * @variables locales
  *  prec - pointeur de pointeur sur le sous arbre trouvé.
  *  cour - pointeur sur le sous arbre courant.
@@ -96,7 +98,7 @@ arbre_t ** arbreRecherche(char e, arbre_t ** arbre);
  *  cour - pointeur sur le sous arbre courant.
  *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
  * @sortie
- *	Le nombre de noeuds rencontré pendant le parcours de l'arbre.
+ *  Le nombre de noeuds rencontré pendant le parcours de l'arbre.
  */
 int compterNoeuds(arbre_t* arbre);
 /**
@@ -127,7 +129,7 @@ int mesurerHauteur(arbre_t* arbre);
  *  cour - pointeur sur le sous arbre courant.
  *  p - pointeur sur la pile utilisé pour le parcours de l'arbre.
  * @sortie
- *	Le nombre de feuilles rencontré pendant le parcours de l'arbre.
+ *  Le nombre de feuilles rencontré pendant le parcours de l'arbre.
  */
 int compterFeuilles(arbre_t* arbre);
 
