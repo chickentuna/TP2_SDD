@@ -45,7 +45,7 @@
 }
 
 #define creerBoolDonnee(donnee, type, condition) {						\
-	creerTamponDonnee(donnee, type, (condition ? "VRAI" : "FAUX"));		\
+	donnee = creerDonnee(type, (condition ? "VRAI" : "FAUX"));		\
 }
 
 #define TYPE_ENTREE						"Entrée"
