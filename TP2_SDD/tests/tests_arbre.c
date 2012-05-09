@@ -58,31 +58,33 @@ result_t* test_initArbre() {
 		arbre_t * a = NULL;
 		int res;
 
-		a = initArbre("1*(2*(3+4)+5)+6");
+		a = initArbre("a*(b*(c+d)+e)+f");
 
-		res = (a->valeur == '1') && (a->lv->valeur == '2')
-				&& (a->lv->lv->valeur == '3') && (a->lv->lv->lh->valeur == '4')
-				&& (a->lv->lh->valeur == '5') && (a->lh->valeur == '6');
+		res = (a->valeur == 'a') && (a->lv->valeur == 'b')
+				&& (a->lv->lv->valeur == 'c') && (a->lv->lv->lh->valeur == 'd')
+				&& (a->lv->lh->valeur == 'e') && (a->lh->valeur == 'f');
 
 		assert_t* assert = assertion(r, res, "Cas général");
 		
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
 		ajouterDonnee(assert, s);
 		libererArbre(a);
 	}
 	//Cas arbre à un élément
-	/*{
+	{
 		donnee_t* s;
 		arbre_t * a = NULL;
 		int res;
 
-		a = initArbre("1");
-		res = (a->valeur == '1' && a->lv == NULL && a->lh == NULL);
+		a = initArbre("A");
+		res = (a->valeur == 'A' && a->lv == NULL && a->lh == NULL);
 		assert_t* assert = assertion(r, res, "Cas à un seul noeud");
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "A"));
 		ajouterDonnee(assert, s);
 		libererArbre(a);
-	}*/
+	}
 
 	return r;
 }
@@ -187,7 +189,7 @@ result_t* test_compterNoeuds() {
 		DEBUG_creerArbreDroit_static(arbre);
 		int size;
 
-		creerTamponDonnee(e, TYPE_ENTREE, "a*(b+c*d)");
+		e = creerDonnee(TYPE_ENTREE, "a*(b+c*d)");
 
 		size = compterNoeuds(arbre);
 		assert_t* a = assertion(r, size == 4, "Cas général (droit)");

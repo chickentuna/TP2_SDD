@@ -248,7 +248,7 @@ int compterFeuilles(arbre_t* arbre) {
 			cour = cour->lh;/*On part sur le lien horizontal*/
 		}
 	}
-
+	libererPile(p);
 	return total;
 }
 

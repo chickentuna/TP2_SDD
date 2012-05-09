@@ -34,11 +34,11 @@ int main(int argc, char** argv) {
 		/*Tests arbre*/
 		/*AJOUTE_TEST(test_head, arbreSupprimer);
 		AJOUTE_TEST(test_head, arbreSupprimerValeur);
-		AJOUTE_TEST(test_head, arbreRecherche);
+		AJOUTE_TEST(test_head, arbreRecherche);*/
 		AJOUTE_TEST(test_head, mesurerHauteur);
 		AJOUTE_TEST(test_head, compterFeuilles);
-		AJOUTE_TEST(test_head, compterNoeuds);*/
-		AJOUTE_TEST(test_head, initArbre);
+		AJOUTE_TEST(test_head, compterNoeuds);/*
+		AJOUTE_TEST(test_head, initArbre);*/
 
 		/*Tests pile*/
 		/*AJOUTE_TEST(test_head, vide);
@@ -46,8 +46,8 @@ int main(int argc, char** argv) {
 		AJOUTE_TEST(test_head, vide);
 		AJOUTE_TEST(test_head, depiler);
 		AJOUTE_TEST(test_head, empiler);
-		AJOUTE_TEST(test_head, initPile);*/
-
+		AJOUTE_TEST(test_head, initPile);
+*/
 		executerTests(test_head, FLAG_EMPTY);
 		detruireTests(test_head);
 
