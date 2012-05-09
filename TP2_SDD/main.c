@@ -15,20 +15,24 @@ int main(int argc, char** argv) {
 	if (argc > 1) {
 		f = fopen(argv[1],"r");
 		if (f==NULL) {
-			erreur("Fichier introuvable.");
+			erreur("Fichier introuvable.\n");
 		}
 		buf = ALLOC(256,char);
 		buf = fgets(buf,256,f);
 		if (buf==NULL) {
-			erreur("Fichier vide ?");
+			erreur("Fichier vide ?\n");
 		}
+		fclose(f);
+		
 		a = initArbre(buf);
-
+		free(buf);
+		buf = arbreToString(a);
 		printf("Arbre chargé: %s\n",buf);
-		printf("Noeuds de l'arbre (%d noeuds) : %s\n",compterNoeuds(a),arbreToString(a));
-		printf("Feuilles : %d\n",compterFeuilles(a));
-		printf("Hauteur : %d\n",mesurerHauteur(a));
-
+		printf("Noeuds de l'arbre (%d noeuds) : %s\n", compterNoeuds(a), buf);
+		printf("Feuilles : %d\n", compterFeuilles(a));
+		printf("Hauteur : %d\n", mesurerHauteur(a));
+		free(buf);
+		libererArbre(a);
 	} else {
 
 		/*Tests arbre*/
