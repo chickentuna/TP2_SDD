@@ -142,14 +142,19 @@ result_t* test_arbreSupprimerValeur() {
 		arbre_t * a = NULL;
 		assert_t* assert;
 		donnee_t* s;
+		int res=VRAI;
 
 		a = initArbre("a*(b*(c+d)+e)+f");
-
 		
 		arbreSupprimerValeur('b', &a);
 		creerTamponDonnee(s, TYPE_RETOUR, arbreToString(a));
-
-		assert = assertion(r, a->lv == NULL, "Cas général (suppresion de b)");
+		if (a->lv == NULL) {
+			res = FAUX;
+		}
+		else if (a->lv->valeur != 'e') {
+			res = FAUX;
+		}
+		assert = assertion(r, res, "Cas général (suppresion de b)");
 
 		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
 		ajouterDonnee(assert, s);
@@ -165,13 +170,21 @@ result_t* test_arbreSupprimer() {
 		arbre_t * a = NULL;
 		assert_t* assert;
 		donnee_t* s;
+		int res=VRAI;
 
 		a = initArbre("a*(b*(c+d)+e)+f");
 
 		arbreSupprimer(&(a->lv));
 		creerTamponDonnee(s, TYPE_RETOUR, arbreToString(a));
 
-		assert = assertion(r, a->lv == NULL, "Cas général (suppresion de b)");
+		if (a->lv == NULL) {
+			res = FAUX;
+		}
+		else if (a->lv->valeur != 'e') {
+			res = FAUX;
+		}
+
+		assert = assertion(r, res, "Cas général (suppresion de b)");
 
 		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b*(c+d)+e)+f"));
 		ajouterDonnee(assert, s);
