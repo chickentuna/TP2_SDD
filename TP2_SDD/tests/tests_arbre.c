@@ -283,7 +283,7 @@ result_t* test_mesurerHauteur() {
 
 		int deep = mesurerHauteur(head);
 
-		assert_t* a = assertion(r, deep == 2, "Cas général à gauche"); //TODO: pas tres clair
+		assert_t* a = assertion(r, deep == 2, "Cas général à gauche");
 		ajouterDonnee(a, creerDonnee(TYPE_ENTREE, "a*(b*d+c)"));
 		ajouterDonnee(a, creerDonneeWithInt(TYPE_RETOUR, "Hauteur", deep));
 	}
