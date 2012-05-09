@@ -71,6 +71,25 @@ result_t* test_initArbre() {
 		ajouterDonnee(assert, s);
 		libererArbre(a);
 	}
+	//Cas complexe
+	{
+		donnee_t* s;
+		arbre_t * a = NULL;
+		int res;
+		char * buf;
+
+		a = initArbre("a*(b+c*(d+e+f+g))+x*d*e+g*(h+i)");
+		buf = arbreToString(a);
+		res = !strcmp(buf,"[ a b c d e f g x d e g h i ]");
+		free(buf);
+
+		assert_t* assert = assertion(r, res, "Cas d'un arbre complexe");
+		
+		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
+		ajouterDonnee(assert, creerDonnee(TYPE_ENTREE, "a*(b+c*(d+e+f+g))+x*d*e+g*(h+i)"));
+		ajouterDonnee(assert, s);
+		libererArbre(a);
+	}
 	//Cas arbre à un élément
 	{
 		donnee_t* s;
