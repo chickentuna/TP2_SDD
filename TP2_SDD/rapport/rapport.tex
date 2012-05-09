@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt] {article}
 
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{verbatim}
@@ -12,33 +12,53 @@
 
 \begin{document}
 
-\part{Présentation du projet}
+\part{PrÃ©sentation du projet}
 
-  L'objectif de ce TP est de coder un système capable de gérer et de parcourir des arbores par lien vertical et lien horizontal. La structure de donnée sera codée en C et le code contiendra les fonctions de recherche et suppression (avec élagage), ainsi que la possibilité de charger un arbre en mémoire à partir de son écriture algébrique dans un fichier. Le code pourra aussi afficher à l'écran le nombre de n?uds, le nombre de feuilles, et la hauteur d'un arbre.
+  L'objectif de ce TP est de coder un systÃ¨me capable de gÃ©rer et de parcourir des arborescences structurÃ©es par lien vertical et horizontal. La structure de donnÃ©e sera codÃ©e en \verb?C? et le code contiendra les fonctions de recherche et suppression (avec Ã©lagage), ainsi que la possibilitÃ© de charger un arbre en mÃ©moire Ã  partir de son Ã©criture algÃ©brique dans un fichier. Le code pourra aussi afficher Ã  l'Ã©cran le nombre de nÅ“uds, le nombre de feuilles, et la hauteur d'un arbre.
 
 \section{Description du projet}
-\subsection{Schéma de la structure de donnée}
-	Chaque n?ud d'un arbre est représenté par un mot de 3 bloc. Ce bloc contient: \begin{itemize}
-\item La valeur du n?ud (ici, un seul caractère).
-\item Le lien horizontal du n?ud, c'est à dire un pointeur vers son frère suivant (s'il en a un).
-\item Le lien vertical du n?ud, c'est à dire un pointeur vers son premier fils (s'il en a).
-\end{itemize}
-Le premier n?ud est appelé \emph{racine} de l'arbre.\\
-\par Le parcours d'un arbre se fait grâce à une pile. Une pile est représentée par un tableau d'éléments avec indice de tête.\\
-\par Dans le code, les piles et les arborescences utilisées sont des \verb#struct#s. De plus, les éléments de la pile sont déclaré avec un typedef pour plus de généricité et son, par défaut, des \verb#void*#. Quant au valeur des noeuds d'un arbre, ce sont des \verb#char#.
-\begin{verbatim}
-cf. DDD_arbre_exemple.png
-\end{verbatim}
 
+\subsection{SchÃ©ma de la structure de donnÃ©e}
+
+Chaque nÅ“ud d'un arbre est reprÃ©sentÃ© par un mot de 3 bloc. Ce bloc contient :
+
+\vspace{0.5cm}
+	
+\begin{itemize}
+\item La valeur du nÅ“ud (ici, un seul caractÃ¨re).
+\item Le lien horizontal du nÅ“ud, c'est Ã  dire un pointeur vers son frÃ¨re suivant (s'il en a un).
+\item Le lien vertical du nÅ“ud, c'est Ã  dire un pointeur vers son premier fils (s'il en a).
+\end{itemize}
+
+\vspace{0.5cm}
+
+Le premier nÅ“ud est appelÃ© \emph{racine} de l'arbre.\\
+
+Le parcours d'un arbre se fait grÃ¢ce Ã  une pile. Une pile est par un tableau d'Ã©lÃ©ments dont un dÃ©signÃ© comme Ã©tant la tÃªte. L'indice de l'Ã©lÃ©ment de tÃªte est stockÃ©e en mÃ©moire.\\
+%TODO peut-Ãªtre qu'il faudrait plus approfondir la pile
+
+Dans le code, les piles et les arborescences utilisÃ©es sont des \verb#struct#s. De plus, les Ã©lÃ©ments de la pile sont dÃ©clarÃ©s avec un \verb#typedef# afin d'en garantir la gÃ©nÃ©ricitÃ©.
+%
+% et sont, par dÃ©faut, des \verb#void*#. (What the fuck ? j'ai pas compris en quoi les typedef sont des void* ?)
+%
+Quant au valeur des nÅ“uds d'un arbre, ce sont des \verb?char?
+%
+% (cf. DDD_arbre_exemple.png). (je sais pas pourquoi Ã§a bug...
+% J'ai Ã©tÃ© obligÃ© de commenter.
 \subsection{Organisation du code source}
 
-Le code source est divisé en 3 parties : Le noyau (toutes les fonctions répondant au besoins du TP),\\ la section 'tests' pour les fonctions de test et leur système de gestion,\\ et le programme principal, \verb#main.c#, contenant la fonction \verb#main()# qui charge un fichier dont le nom est donné en ligne de commande et affiche la structure de donnée générée. Le fichier doit contenir la notation algébrique d'un arbre avec un seul caractère par élément.
-Une exécution du programme avec le fichier \verb#exemple.arbre# vu par ddd est donné en annexe, ainsi que son rapport valgrind.
+Le code source est divisÃ© en trois parties : Le noyau (toutes les fonctions rÃ©pondant au besoins du TP), la section \og tests\fg\ pour les fonctions de test, le systÃ¨me de gestion des tests (indÃ©pendant du TP), et enfin le programme principal, \verb#main.c#, contenant la fonction \verb#main()# qui charge un fichier dont le nom est donnÃ© en ligne de commande et affiche la structure de donnÃ©e gÃ©nÃ©rÃ©e. Le fichier doit contenir la notation algÃ©brique d'un arbre avec un seul caractÃ¨re par Ã©lÃ©ment.\\
 
-dans \verb#main.c#, qui permet soit d'exécuter les tests de toutes les fonctions du noyau, soit de charger un fichier à traiter (le nom du fichier doit être donné en commande).\\
+Une exÃ©cution du programme avec le fichier \verb#exemple.arbre# vu par \verb?ddd? est donnÃ© en annexe, ainsi que son rapport \verb?valgrind?.
 
-\par Les macros et types généraux sont déclarés dans \verb#lib.h#.\\
-Les fonctions relatives à la pile sont codés dans \verb#pile.c#.\\
+dans \verb#main.c#, qui permet soit d'exÃ©cuter les tests de toutes les fonctions du noyau, soit de charger un fichier Ã  traiter (le nom du fichier doit Ãªtre donnÃ© en commande).\\
+
+Les macros et types gÃ©nÃ©raux sont dÃ©clarÃ©s dans \verb#lib.h#.\\
+
+Les fonctions relatives Ã  la pile sont codÃ©s dans \verb#pile.c#.
+
+\vspace{0.5cm}
+
 \begin{itemize}
 	\item \verb#initPile()#
 	\item \verb#empiler()#
@@ -47,8 +67,13 @@ Les fonctions relatives à la pile sont codés dans \verb#pile.c#.\\
 	\item \verb#pleine()#
 	\item \verb#libererPile()#
 \end{itemize}
-\newline
-Les fonctions relatives aux arbres sont codés dans \verb#arbre.c#.\\
+
+\vspace{0.5cm}
+
+Les fonctions relatives aux arbres sont codÃ©es dans \verb#arbre.c#.\\
+
+\vspace{0.5cm}
+
 \begin{itemize}
     \item \verb#initArbre()#
     \item \verb#arbreSupprimer()#
@@ -59,24 +84,37 @@ Les fonctions relatives aux arbres sont codés dans \verb#arbre.c#.\\
     \item \verb#compterFeuilles()#
     \item \verb#libererArbre()#
 \end{itemize}
-La fonction \verb#initArbre()# utilise 3 sous programmes : 
+
+\vspace{0.5cm}
+
+La fonction \verb#initArbre()# utilise trois sous-programmes : 
+
+\vspace{0.5cm}
+
 \begin{itemize}
     \item \verb#obtenirValeur()#
     \item \verb#obtenirOperation()#
     \item \verb#obtenirSuivant()#
 \end{itemize}
-\newline
-La documentation des ces fonctions se trouvent respectivement dans \verb#pile.h# et \verb#arbre.h#. Ces fichiers contiennent aussi des fonctions \verb#toString()# pour convertir les structures de données associées en chaine de caractères, utilisées uniquement par le système de test.
-\\
-Les fonctions qui gèrent l'exécution et l'affichage des sorties des test sont déclarés dans \verb#testlib.h# et codé dans \verb#testlib.c#.
-Chaque fonction du noyau est testé individuellement dans \verb#tests.c# selon le principe des tests unitaires (c'est a dire que chaque fonction est testée dans un contexte qui lui est propre). La liste des tests à exécuter est déclarée dans \verb#tests.h#.
-Pour lancer les tests, ajoutez '\verb#test#' à la ligne d'exécution du programme.
-Le résultat d'une exécution de ces tests est donné en annexe, ainsi que son rapport valgrind.\\
 
-\section{Méthodologie}
+\vspace{0.5cm}
+
+La documentation des ces fonctions se trouve respectivement dans \verb#pile.h# et \verb#arbre.h#. Ces fichiers contiennent aussi des fonctions \verb#toString()# pour convertir les structures de donnÃ©es associÃ©es en chaine de caractÃ¨res, utilisÃ©es uniquement par le systÃ¨me de test.\\
+
+Les fonctions qui gÃ¨rent l'exÃ©cution et l'affichage des sorties des test sont dÃ©clarÃ©es dans \verb#testlib.h# et codÃ©es dans \verb#testlib.c#.\\
+
+Chaque fonction du noyau est testÃ©e individuellement dans \verb#tests.c# selon le principe des tests unitaires (c'est-Ã -dire que chaque fonction est testÃ©e dans un contexte qui lui est propre). La liste des tests Ã  exÃ©cuter est dÃ©clarÃ©e dans \verb#tests.h#.\\
+
+Pour lancer les tests, ajoutez \verb#test# Ã  la ligne d'exÃ©cution du programme.\\
+
+Le rÃ©sultat d'une exÃ©cution de ces tests est donnÃ© en annexe, ainsi que son rapport \verb?valgrind?.\\
+
+\section{MÃ©thodologie}
 \subsection{Langage de programmation}
-Il était imposé d'utiliser le langage C dans le cadre de ce TD.
+Il Ã©tait imposÃ© d'utiliser le langage C dans le cadre de ce TD.
 \subsection{Gestionnaire de version}
-Afin de pouvoir travailler à deux simplement nous avons décidé d'utiliser le gestionnaire de version GIT ainsi que GitHub.com pour centraliser le code.
+Afin de pouvoir travailler Ã  deux simplement nous avons dÃ©cidÃ© d'utiliser le gestionnaire de version GIT ainsi que GitHub.com pour centraliser le code.
 
 \end{document}
+
+% Franchement, bravo pour ce compte rendu. Beau travail. J'ai corrigÃ© quelques faute et l'encodage aussi.
