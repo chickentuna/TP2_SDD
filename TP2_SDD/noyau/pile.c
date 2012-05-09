@@ -52,7 +52,7 @@ char* pileToString(pile_t* pile) {
 			old_buf = buf;
 
 			el = ALLOC(25,char);
-			sprintf(el,"%d",(int)pile->tab[i]);
+			sprintf(el,"%ld",(long)pile->tab[i]);
 			buf = str_join("", buf, " ", el, NULL);
 
 			free(old_buf);

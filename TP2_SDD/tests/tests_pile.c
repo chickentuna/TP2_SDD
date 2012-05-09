@@ -25,7 +25,7 @@ result_t* test_empiler() {
 		pile_t* pile = initPile(10);
 		donnee_t* e;
 		donnee_t* s;
-		int i;
+		long i;
 
 		creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
@@ -52,7 +52,7 @@ result_t* test_empiler() {
 		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
-		int i;
+		long i;
 
 		for (i = 1; i < 4; i++) {
 			empiler((elem_t)i, pile);
@@ -85,8 +85,8 @@ result_t* test_depiler() {
 		donnee_t* e;
 		donnee_t* s;
 		donnee_t* l;
-		int i;
-		int elems[3];
+		long i;
+		long elems[3];
 		char* buf;
 
 		for (i = 1; i < 4; i++) {
@@ -94,7 +94,7 @@ result_t* test_depiler() {
 		}creerTamponDonnee(e, TYPE_ENTREE, pileToString(pile));
 
 		for (i = 0; i < 3; i++)
-			elems[i] = (int)depiler(pile);
+			elems[i] = (long)depiler(pile);
 
 		assert_t* assert = assertion(r, pile->tete = -1,
 				"Cas général (3 depilements)");
@@ -102,7 +102,7 @@ result_t* test_depiler() {
 		creerTamponDonnee(s, TYPE_SORTIE, pileToString(pile));
 
 		buf = ALLOC(6,char);
-		sprintf(buf, "%d,%d,%d", elems[0], elems[1], elems[2]);
+		sprintf(buf, "%ld,%ld,%ld", elems[0], elems[1], elems[2]);
 		l = creerDonnee("Retour", buf);
 		free(buf);
 
@@ -164,7 +164,8 @@ result_t* test_vide() {
 		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
-		int res, i;
+		int res;
+		long i;
 
 		for (i = 1; i < 4; i++)
 			empiler((elem_t)i, pile);
@@ -191,7 +192,8 @@ result_t* test_pleine() {
 		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
-		int res, i;
+		int res;
+		long i;
 
 		for (i = 1; i < 4; i++)
 			empiler((elem_t)i, pile);
@@ -215,7 +217,8 @@ result_t* test_pleine() {
 		pile_t* pile = initPile(3);
 		donnee_t* e;
 		donnee_t* s;
-		int res, i;
+		int res;
+		long i;
 
 		for (i = 1; i < 3; i++)
 			empiler((elem_t)i, pile);
