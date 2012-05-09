@@ -54,7 +54,7 @@ result_t* test_initArbre() {
 	result_t* r = creerResultat();
 	//Cas général
 	{
-		//donnee_t* s;
+		donnee_t* s;
 		arbre_t * a = NULL;
 		int res;
 
@@ -65,11 +65,9 @@ result_t* test_initArbre() {
 				&& (a->lv->lh->valeur == '5') && (a->lh->valeur == '6');
 
 		assert_t* assert = assertion(r, res, "Cas général");
-		/*
+		
 		creerTamponDonnee(s, TYPE_SORTIE, arbreToString(a));
 		ajouterDonnee(assert, s);
-		*/
-
 		libererArbre(a);
 	}
 	//Cas arbre à un élément

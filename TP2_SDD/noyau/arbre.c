@@ -281,10 +281,12 @@ void libererArbre(arbre_t * arbre) {
 char* arbreToString(arbre_t * arbre) {
 	char* old_buf = NULL;
 	char* buf = ALLOC(3, char);
-	buf = "[";
 	char* el = NULL;
 	arbre_t * cour = NULL;
 	pile_t * p;
+
+	buf[0]='[';
+	buf[1]='\0';
 
 	/* Accès à la première racine. */
 	cour = arbre;
@@ -321,7 +323,10 @@ char* arbreToString(arbre_t * arbre) {
 			cour = cour->lh;/*On part sur le lien horizontal*/
 		}
 	}
+	old_buf = buf;
 	buf = str_join("", buf, " ]", NULL);
+	free(old_buf);
+	libererPile(p);
 	return buf;
 }
 
