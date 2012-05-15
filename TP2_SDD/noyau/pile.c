@@ -19,8 +19,8 @@ void empiler(elem_t element, pile_t* pile) {
 elem_t depiler(pile_t* pile) {
 	if (!vide(pile)) {
 		return pile->tab[pile->tete--];
-	}
-	return (elem_t)0;
+	} else
+		return (elem_t)0;
 }
 
 int vide(pile_t* pile) {

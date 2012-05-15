@@ -26,9 +26,9 @@ int main(int argc, char** argv) {
 			fclose(f);
 			
 			a = initArbre(buf);
+			printf("Arbre chargé: %s\n",buf);
 			free(buf);
 			buf = arbreToString(a);
-			printf("Arbre chargé: %s\n",buf);
 			printf("Noeuds de l'arbre (%d noeuds) : %s\n", compterNoeuds(a), buf);
 			printf("Feuilles : %d\n", compterFeuilles(a));
 			printf("Hauteur : %d\n", mesurerHauteur(a));

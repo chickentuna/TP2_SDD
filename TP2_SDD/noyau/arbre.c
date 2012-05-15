@@ -1,72 +1,96 @@
 ﻿#include "arbre.h"
 #include "pile.h"
 
-//TODO: dérécursifier. + gestion d'erreurs + ajout des commentaires.
-//TODO: COMMENT ON DERECURSIFIE CETTE MERDE? -_-'
 arbre_t * initArbre(char * str) {
-	arbre_t *nouv = NULL;
-	arbre_t * racine = NULL;
-	arbre_t *suiv;
-	nouv = ALLOC(1, arbre_t);
-	int c = 0;
-	char val;
-	char op;
-	char *buf;
+	/*
+	 * str - La chaîne de caractères
+	 */
 
+	arbre_t *nouv = NULL;		/* nouv - pointeur sur le sous arbre courant */
+	arbre_t * racine = NULL;	/* racine - pointeur sur la racine de l'arbre à renvoyer */
+	arbre_t *suiv;				/* suiv - pointeur sur le noeud à lier à la racine */
+	int c = 0; 					/* c - Compteur d'indice de position dans la chaîne de caractères. */
+	char val;  					/* val - Caractère de la valeur du noeud courant */
+	char op;   					/* op - Caractère de l'opération suivante */
+	char *buf; 					/* buf - Chaîne de caractères tampon pour initialiser les sous-arbres*/
+
+	/* Allocation de la racine */
+	nouv = ALLOC(1, arbre_t);
+
+	/*On place le compteur au premier caractère de l'arbre*/
 	while (str[c] == '(' || str[c] == ')') {
 		c++;
 	}
+	/*S'il n'y a rien, l'arbre est vide*/
 	if (str[c] == '\0')
 		return NULL;
 
+	/*On lit la racine de l'arbre pour initialiser la structure*/
 	val = obtenirValeur(str, &c);
 	nouv->valeur = val;
 	nouv->lv = NULL;
 	nouv->lh = NULL;
+	/*On commence la construction des liens à la racine de l'arbre*/
 	racine = nouv;
 
+	/*On parcours la chaine de caractères*/
 	while (str[c] != '\0') {
 
+		/*On récupère la première opération à effectuer*/
 		op = obtenirOperation(str, &c);
+		/*Pas d'opérations => le noeud est une feuille*/
 		if (op == '\0') {
+			/*On renvoi le noued car il n'y pas de liens à construire [correspond à la racine du sous arbre courant]*/
 			return nouv;
 		}
+
+		/*On récupère maintenant le sous arbre suivant à lier au noeud courant*/
 		buf = obtenirSuivant(str, &c);
-
 		suiv = initArbre(buf);
-
 		free(buf);
-		if (op == '+') {
-			nouv->lh = suiv;
-			nouv = suiv;
 
+		/*On construit le lien*/
+		if (op == '+') {
+			/*Dans le cas d'un lien horizontal, la prochaine opération portera sur le noeud suivant*/
+			nouv->lh = suiv;
+
+			/*On change le noeud courant, car on a changé de sous arbre*/
+			nouv = suiv;
 		} else if (op == '*') {
+			/*Dans le cas d'un lien vertical, la prochaine opération portera sur le noeud courant*/
 			nouv->lv = suiv;
 		} else {
-			printf("Erreur de chargement d'arbre à la position %d : '%c'", c,
-					str[c]);
+			/*Si l'operation n'est pas reconnue, il y a une erreur dans la chaîne de caractères*/
+			printf("Erreur de chargement d'arbre à la position %d : '%c'", c, str[c]);
 			printf("String: %s", str);
 			exit(EXIT_FAILURE);
 		}
-
+		/*Le lien a été construit, on doit donc récuperer l'operation suivante*/
 	}
+
+	/*La chaîne a été entièrement parcourue, on renvoie la racine de l'arbre*/
 	return racine;
 }
 
+/* Recuperation de la sous-chaine suivante correspondant au sous-arbre suivant dans la chaine de caractères */
 char * obtenirSuivant(char * str, int *c) {
-	int i = *c;
-	int n = 0, k;
-	char *buf;
-
-	while (str[*c] == ' ')
-		(*c)++;
+	/*
+	 * c - Compteur d'indice de position dans la chaîne de caractères.
+	 * str - La chaîne de caractères
+	 */
+	int i = *c;   /* i = compteur de position pour la sous-chaine */
+	int n = 0, k; /* n = compteur de parenthèse ouvrante; k = compteur de recopie pour la sous chaine à renvoyer */
+	char *buf;    /* buf = chaine de caractère tampon pour la sous-chaine à renvoyer */
 
 	i = *c;
+	/*On parcours la chaine de caractères tant qu'il porte sur le sous-arbre indiqué par le compteur c*/
+	/*Le sous arbre est terminé quand on atteint le lien horizontal de la racine [peut etre NULL] dans la chaîne*/
 	while (str[i] != '+' && str[i] != '\0') {
 
 		if (str[i] == '(') {
+			/* S'il y a une parenthèse ouvrante, on cherche la parenthèse fermante correspondante */
 			n = 1;
-			while (n > 0) {
+			while (n > 0) { /* On continue d'incrémenter tant qu'il reste des parenthèses fermantes à trouver */
 				i++;
 				if (str[i] == '(')
 					n++;
@@ -76,38 +100,52 @@ char * obtenirSuivant(char * str, int *c) {
 		}
 		i++;
 	}
-	buf = ALLOC(i-*c+1,char);
-	n = 0;
-	for (k = *c; k < i; k++) {
-		if (str[k] != ' ')
-			buf[n++] = str[k];
-	}
-	buf[n] = '\0';
-	*c = i;
 
+	/* On alloue une chaine de taille identique à la sous-chaîne [i-c+1] */
+	buf = ALLOC(i-*c+1,char);
+
+	/*On recopie la sous-chaine dans la chaîne de caractères tampon*/
+	for (k = *c; k < i; k++) {
+		buf[k-(*c)] = str[k];
+	}
+	buf[k-(*c)] = '\0';
+
+	/*On place le compteur de position de la chaîne à la fin du sous arbre*/
+	*c = i;
+	/* On renvoie la sous-chaine [correspondant au sous arbre suivant] */
 	return buf;
 }
 
+/* Récupération de l'opération suivante à effectuer sur l'arbre dans une chaine de caractère */
 char obtenirOperation(char * str, int *c) {
-	while (str[*c] == ' ')
-		(*c)++;
+	/*
+	 * c - Compteur d'indice de position dans la chaîne de caractères.
+	 * str - La chaîne de caractères
+	 */
+
+	/*On test si on se trouve sur une feuille*/
 	if (str[(*c)] == '*' || str[(*c)] == '+') {
+		/*On renvoie le caractère de l'operation*/
 		return str[(*c)++];
-	} else
+	} else {
+		/*On renvoi 'fin de chaîne' pour indiquer qu'il n'y a pas d'operation [donc pas de liens] */
 		return '\0';
+	}
 }
 
+/* Récupération de la valeur du noeud suivant de l'arbre dans une chaine de caractère */
 char obtenirValeur(char * str, int *c) {
-	int i = *c;
-	char res;
+	/*
+	 * c - Compteur d'indice de position dans la chaîne de caractères.
+	 * str - La chaîne de caractères
+	 */
 
-	while (str[i] != ')' && str[i] != '+' && str[i] != '*' && str[i] != '\0') {
-		i++;
+	/*On avance dans la chaîne de caractères jusqu'à dépassement du caractère  [ on survole les '(' ]*/
+	while (str[*c] != ')' && str[*c] != '+' && str[*c] != '*' && str[*c] != '\0') {
+		(*c)++;
 	}
-	*c = i;
-	res = str[i - 1];
-
-	return res;
+	/*On renvoie le caractère dépassé*/
+	return str[(*c) - 1];
 }
 
 void arbreSupprimer(arbre_t ** arbre) {
