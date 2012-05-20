@@ -28,7 +28,13 @@ typedef struct bloc_arbre {
  * @param
  * 	str - Chaîne de caractères correspondant à la notation algébrique de l'arbre à créer.
  * @variables locales
- * 	//TODO: Mettre ceci à jour lorsque la fonction est finie.
+ *  nouv - pointeur sur le sous arbre courant
+ *  racine - pointeur sur la racine de l'arbre à renvoyer
+ *  suiv - pointeur sur le noeud à lier à la racine
+ *  c - Compteur d'indice de position dans la chaîne de caractères.
+ *  val - Caractère de la valeur du noeud courant
+ *  op - Caractère de l'opération suivante
+ *  buf - Chaîne de caractères tampon pour initialiser les sous-arbres
  * @sortie
  *  Un pointeur sur le nouvel arbre.
  */
