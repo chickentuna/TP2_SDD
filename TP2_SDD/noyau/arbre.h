@@ -139,6 +139,8 @@ int mesurerHauteur(arbre_t* arbre);
  */
 int compterFeuilles(arbre_t* arbre);
 
+int similaire(arbre_t* a1, arbre_t* a2);
+
 /**
  * Fonction arbreToString():
  * @description

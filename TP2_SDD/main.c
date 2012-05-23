@@ -11,25 +11,45 @@ int main(int argc, char** argv) {
 	FILE* f;
 	char* buf;
 	arbre_t * a;
+	arbre_t * a2;
 
+	f = fopen(argv[1], "r");
+	if (f == NULL) {
+		erreur("Fichier introuvable.\n");
+	}
+	buf = ALLOC(256,char);
+	buf = fgets(buf, 256, f);
+	if (buf == NULL) {
+		erreur("Fichier vide ?\n");
+	}
+	fclose(f);
+
+	a = initArbre("a*b*b*d*e");
+	a2 = initArbre("a*x*b*c*e*e");
+
+
+	printf("similaire : %d",similaire(a,a2));
+
+	return 0;
 	if (argc > 1) {
-		if (strcmp(argv[1],"test")!=0) {
-			f = fopen(argv[1],"r");
-			if (f==NULL) {
+		if (strcmp(argv[1], "test") != 0) {
+			f = fopen(argv[1], "r");
+			if (f == NULL) {
 				erreur("Fichier introuvable.\n");
 			}
 			buf = ALLOC(256,char);
-			buf = fgets(buf,256,f);
-			if (buf==NULL) {
+			buf = fgets(buf, 256, f);
+			if (buf == NULL) {
 				erreur("Fichier vide ?\n");
 			}
 			fclose(f);
-			
+
 			a = initArbre(buf);
-			printf("Arbre chargé: %s\n",buf);
+			printf("Arbre chargé: %s\n", buf);
 			free(buf);
 			buf = arbreToString(a);
-			printf("Noeuds de l'arbre (%d noeuds) : %s\n", compterNoeuds(a), buf);
+			printf("Noeuds de l'arbre (%d noeuds) : %s\n", compterNoeuds(a),
+					buf);
 			printf("Feuilles : %d\n", compterFeuilles(a));
 			printf("Hauteur : %d\n", mesurerHauteur(a));
 			free(buf);
@@ -56,7 +76,8 @@ int main(int argc, char** argv) {
 			detruireTests(test_head);
 		}
 	} else {
-		printf("Veuillez ajouter le nom d'un fichier arbre à charger (ou 'test' pour lancer les tests unitaires).\n");
+		printf(
+				"Veuillez ajouter le nom d'un fichier arbre à charger (ou 'test' pour lancer les tests unitaires).\n");
 	}
 	return EXIT_SUCCESS;
 }

@@ -34,17 +34,13 @@ Chaque nœud d'un arbre est représenté par un mot de 3 bloc. Ce bloc contient 
 
 Le premier nœud est appelé \emph{racine} de l'arbre.\\
 
-Le parcours d'un arbre se fait grâce à une pile. Une pile est par un tableau d'éléments dont un désigné comme étant la tête. L'indice de l'élément de tête est stockée en mémoire.\\
-%TODO peut-être qu'il faudrait plus approfondir la pile
+Le parcours d'un arbre se fait grâce à une pile. Une pile est représentée par un tableau d'éléments. L'un d'entre eux est un désigné comme étant la tête. L'indice de l'élément de tête est stockée en mémoire.\\
 
-Dans le code, les piles et les arborescences utilisées sont des \verb#struct#s. De plus, les éléments de la pile sont déclarés avec un \verb#typedef# afin d'en garantir la généricité.
-%
-% et sont, par défaut, des \verb#void*#. (What the fuck ? j'ai pas compris en quoi les typedef sont des void* ?)
-%
-Quant au valeur des nœuds d'un arbre, ce sont des \verb?char?.
-%
-% (cf. DDD_arbre_exemple.png). (je sais pas pourquoi ça bug...
-% J'ai été obligé de commenter.
+Dans le code, les piles et les arborescences utilisées sont des \verb#struct#s. De plus, les éléments de la pile sont déclarés avec un \verb#typedef# afin d'en garantir la généricité et sont, par défaut, des \verb#void*#.
+
+Quant au valeur des nœuds d'un arbre, ce sont des \verb?char?.\\
+\verb?(cf. DDD_arbre_exemple.png)?.
+
 \subsection{Organisation du code source}
 
 Le code source est divisé en trois parties : Le noyau (toutes les fonctions répondant au besoins du TP), la section \og tests\fg\ pour les fonctions de test, le système de gestion des tests (indépendant du TP), et enfin le programme principal, \verb#main.c#, contenant la fonction \verb#main()# qui charge un fichier dont le nom est donné en ligne de commande et affiche la structure de donnée générée. Le fichier doit contenir la notation algébrique d'un arbre avec un seul caractère par élément.\\
@@ -116,5 +112,3 @@ Il était imposé d'utiliser le langage C dans le cadre de ce TD.
 Afin de pouvoir travailler à deux simplement nous avons décidé d'utiliser le gestionnaire de version GIT ainsi que GitHub.com pour centraliser le code.
 
 \end{document}
-
-% Franchement, bravo pour ce compte rendu. Beau travail. J'ai corrigé quelques faute et l'encodage aussi.

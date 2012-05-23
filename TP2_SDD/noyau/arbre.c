@@ -6,13 +6,13 @@ arbre_t * initArbre(char * str) {
 	 * str - La chaîne de caractères
 	 */
 
-	arbre_t *nouv = NULL;		/* nouv - pointeur sur le sous arbre courant */
-	arbre_t * racine = NULL;	/* racine - pointeur sur la racine de l'arbre à renvoyer */
-	arbre_t *suiv;				/* suiv - pointeur sur le noeud à lier à la racine */
-	int c = 0; 					/* c - Compteur d'indice de position dans la chaîne de caractères. */
-	char val;  					/* val - Caractère de la valeur du noeud courant */
-	char op;   					/* op - Caractère de l'opération suivante */
-	char *buf; 					/* buf - Chaîne de caractères tampon pour initialiser les sous-arbres*/
+	arbre_t *nouv = NULL; /* nouv - pointeur sur le sous arbre courant */
+	arbre_t * racine = NULL; /* racine - pointeur sur la racine de l'arbre à renvoyer */
+	arbre_t *suiv; /* suiv - pointeur sur le noeud à lier à la racine */
+	int c = 0; /* c - Compteur d'indice de position dans la chaîne de caractères. */
+	char val; /* val - Caractère de la valeur du noeud courant */
+	char op; /* op - Caractère de l'opération suivante */
+	char *buf; /* buf - Chaîne de caractères tampon pour initialiser les sous-arbres*/
 
 	/* Allocation de la racine */
 	nouv = ALLOC(1, arbre_t);
@@ -61,7 +61,8 @@ arbre_t * initArbre(char * str) {
 			nouv->lv = suiv;
 		} else {
 			/*Si l'operation n'est pas reconnue, il y a une erreur dans la chaîne de caractères*/
-			printf("Erreur de chargement d'arbre à la position %d : '%c'", c, str[c]);
+			printf("Erreur de chargement d'arbre à la position %d : '%c'", c,
+					str[c]);
 			printf("String: %s", str);
 			exit(EXIT_FAILURE);
 		}
@@ -78,9 +79,9 @@ char * obtenirSuivant(char * str, int *c) {
 	 * c - Compteur d'indice de position dans la chaîne de caractères.
 	 * str - La chaîne de caractères
 	 */
-	int i = *c;   /* i = compteur de position pour la sous-chaine */
+	int i = *c; /* i = compteur de position pour la sous-chaine */
 	int n = 0, k; /* n = compteur de parenthèse ouvrante; k = compteur de recopie pour la sous chaine à renvoyer */
-	char *buf;    /* buf = chaine de caractère tampon pour la sous-chaine à renvoyer */
+	char *buf; /* buf = chaine de caractère tampon pour la sous-chaine à renvoyer */
 
 	i = *c;
 	/*On parcours la chaine de caractères tant qu'il porte sur le sous-arbre indiqué par le compteur c*/
@@ -106,9 +107,9 @@ char * obtenirSuivant(char * str, int *c) {
 
 	/*On recopie la sous-chaine dans la chaîne de caractères tampon*/
 	for (k = *c; k < i; k++) {
-		buf[k-(*c)] = str[k];
+		buf[k - (*c)] = str[k];
 	}
-	buf[k-(*c)] = '\0';
+	buf[k - (*c)] = '\0';
 
 	/*On place le compteur de position de la chaîne à la fin du sous arbre*/
 	*c = i;
@@ -153,7 +154,7 @@ void arbreSupprimer(arbre_t ** arbre) {
 
 	/*Suppresion avec élagage*/
 	if (*arbre != NULL) {
-		prec = *arbre;			
+		prec = *arbre;
 		*arbre = (*arbre)->lh;
 		prec->lh = NULL;
 	}
@@ -201,7 +202,39 @@ arbre_t ** arbreRecherche(char e, arbre_t ** arbre) {
 	return prec;
 }
 
+int similaire(arbre_t* a1, arbre_t* a2) {
+	int res = 1;
+	arbre_t * cour;
+	arbre_t * cour2;
+	pile_t * p;
+	pile_t * p2;
 
+	cour = a1; /*Accès à la première racine*/
+	cour2 = a2;
+	p = initPile(514); /*Création de la pile*/
+	p2 = initPile(514); /*Création de la pile*/
+
+	while (!vide(p) || cour != NULL) {
+		empiler(cour, p); /*Empiler noeud courant*/
+		empiler(cour2, p2);
+		cour2 = cour2->lv;
+		cour = cour->lv;/*Descendre sur le lien vertical*/
+		if ((cour==NULL && cour2!=NULL) || (cour2==NULL && cour!=NULL))
+					return 0;
+		while (!vide(p) && cour == NULL) {
+			cour = (arbre_t*) depiler(p);/*On dépile*/
+			cour2 = (arbre_t*) depiler(p2);
+			cour = cour->lh;/*On part sur le lien horizontal*/
+			cour2 = cour2->lh;
+			if ((cour==NULL && cour2!=NULL) || (cour2==NULL && cour!=NULL))
+								return 0;
+		}
+	}
+	libererPile(p);
+	libererPile(p2);
+	return res;
+
+}
 
 int compterNoeuds(arbre_t* arbre) {
 	int total = 0;
@@ -322,8 +355,8 @@ char* arbreToString(arbre_t * arbre) {
 	arbre_t * cour = NULL;
 	pile_t * p;
 
-	buf[0]='[';
-	buf[1]='\0';
+	buf[0] = '[';
+	buf[1] = '\0';
 
 	/* Accès à la première racine. */
 	cour = arbre;
