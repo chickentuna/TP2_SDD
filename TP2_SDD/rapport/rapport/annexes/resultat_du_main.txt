@@ -1,0 +1,4 @@
+Arbre chargé: [ a b c d e f g x d e g h i ]
+Noeuds de l'arbre (13 noeuds) : [ a b c d e f g x d e g h i ]
+Feuilles : 8
+Hauteur : 2

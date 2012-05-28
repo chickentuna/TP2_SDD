@@ -1,0 +1,116 @@
+++ ----------------- TEST n°1 [initPile] ----------------- ++
+    1] "Création d'une pile vide" => réussi
+      [Sortie] vide
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°2 [empiler] ----------------- ++
+    1] "Cas général (empilement de 1,2,3)" => réussi
+      [Entrée] vide
+      [Sortie] [ 1 2 3 ]
+    2] "Cas de la pile pleine (empilement de 4)" => réussi
+      [Entrée] [ 1 2 3 ]
+      [Sortie] [ 1 2 3 ]
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°3 [depiler] ----------------- ++
+    1] "Cas général (3 depilements)" => réussi
+      [Entrée] [ 1 2 3 ]
+      [Sortie] vide
+      [Retour] 3,2,1
+    2] "Cas de la pile vide" => réussi
+      [Entrée] vide
+      [Sortie] vide
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°4 [vide] ----------------- ++
+    1] "Cas de la pile vide" => réussi
+      [Entrée] vide
+      [Retour] VRAI
+    2] "Cas de la pile non vide" => réussi
+      [Entrée] [ 1 2 3 ]
+      [Retour] FAUX
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°5 [pleine] ----------------- ++
+    1] "Cas de la pile pleine" => réussi
+      [Entrée] [ 1 2 3 ]
+      [Retour] VRAI
+    2] "Cas de la pile non pleine" => réussi
+      [Entrée] [ 1 2 ]
+      [Retour] FAUX
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°6 [vide] ----------------- ++
+    1] "Cas de la pile vide" => réussi
+      [Entrée] vide
+      [Retour] VRAI
+    2] "Cas de la pile non vide" => réussi
+      [Entrée] [ 1 2 3 ]
+      [Retour] FAUX
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°7 [initArbre] ----------------- ++
+    1] "Cas général" => réussi
+      [Entrée] a*(b*(c+d)+e)+f
+      [Sortie] [ a b c d e f ]
+    2] "Cas d'un arbre complexe" => réussi
+      [Entrée] a*(b+c*(d+e+f+g))+x*d*e+g*(h+i)
+      [Sortie] [ a b c d e f g x d e g h i ]
+    3] "Cas à un seul noeud" => réussi
+      [Entrée] A
+      [Sortie] [ A ]
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°8 [compterNoeuds] ----------------- ++
+    1] "Cas général (droit)" => réussi
+      [Entrée] a*(b+c*d)
+      [Retour] Nombre de noeuds (v=4)
+    2] "Cas général (gauche)" => réussi
+      [Entrée] a*(b*d+c)
+      [Retour] Nombre de noeuds (v=4)
+    3] "Cas complexe" => réussi
+      [Entrée] a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))
+      [Retour] Nombre de noeuds (v=13)
+    4] "Cas arbre vide" => réussi
+      [Entrée] null
+      [Retour] Nombre de noeuds (v=0)
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°9 [compterFeuilles] ----------------- ++
+    1] "Cas général à droite" => réussi
+      [Entrée] a*(b+c*d)
+      [Retour] Nombre de feuille (v=2)
+    2] "Cas général à gauche" => réussi
+      [Entrée] a*(b*d+c)
+      [Retour] Nombre de feuilles (v=2)
+    3] "Cas complexe" => réussi
+      [Entrée] a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))
+      [Retour] Nombre de feuilles (v=7)
+    4] "Cas arbre vide" => réussi
+      [Entrée] null
+      [Retour] Nombre de feuilles (v=0)
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°10 [mesurerHauteur] ----------------- ++
+    1] "Cas général à droite" => réussi
+      [Entrée] a*(b+c*d)
+      [Retour] Hauteur (v=2)
+    2] "Cas général à gauche" => réussi
+      [Entrée] a*(b*d+c)
+      [Retour] Hauteur (v=2)
+    3] "Cas complexe" => réussi
+      [Entrée] a*(b*(e*(h+i+j)+f)+c+d*g*(k*m+l))
+      [Retour] Hauteur (v=4)
+    4] "Cas arbre vide" => réussi
+      [Entrée] null
+      [Retour] Hauteur (v=0)
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°11 [arbreRecherche] ----------------- ++
+    1] "Cas général (recherche de e)" => réussi
+      [Entrée] a*(b*(c+d)+e)+f
+      [Retour] [ e ]
+    2] "Cas non trouvé (recherche de g)" => réussi
+      [Entrée] a*(b*(c+d)+e)+f
+      [Retour] [ ]
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°12 [arbreSupprimerValeur] ----------------- ++
+    1] "Cas général (suppresion de b)" => réussi
+      [Entrée] a*(b*(c+d)+e)+f
+      [Retour] [ a e f ]
+    ETAT FINAL : SUCCES
+++ ----------------- TEST n°13 [arbreSupprimer] ----------------- ++
+    1] "Cas général (suppresion de b)" => réussi
+      [Entrée] a*(b*(c+d)+e)+f
+      [Retour] [ a e f ]
+    ETAT FINAL : SUCCES
